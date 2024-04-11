@@ -17,7 +17,8 @@
 #include <QDateTime>
 //#include <QImage>
 #include "qt1.h"
-#include "dlinklist.c"		//����dlinklist.h������ʾundefined reference
+#include "dlinklist.c"	
+using namespace std;
 
 static int i=0;
 static int update_t_set=1000;
