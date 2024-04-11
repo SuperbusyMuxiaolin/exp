@@ -417,7 +417,7 @@ void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮�
 }
 void Qt1::updateResistor(){
 	resistor.update();
-	cout<<"阻值信息"<<risistor.getAlert()<<risistor.getResistance()<<endl;
+	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
 }
 
 
