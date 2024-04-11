@@ -93,6 +93,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
  	connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
   	t1.start(1000);						//
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));
+	update_t.start(update_t_set);
 	init_dlinklist(&head);
         width = 480;
         height = 272;
