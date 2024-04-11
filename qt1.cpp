@@ -16,23 +16,21 @@
 #include <fstream>
 #include <QDateTime>
 //#include <QImage>
-#include "qt1.cpp"
-#include "dlinklist.c"
-
-using namespace std;
+#include "qt1.h"
+#include "dlinklist.c"		//����dlinklist.h������ʾundefined reference
 
 static int i=0;
-static int update_t_set=1000;
 int camera=0;
 int W=0;
 int FLAG=1;
-
 //DLIST* Qt1:: p=NULL;
 DLIST *p;
 DLIST *q;
 DLIST head;
-QTimer* refreshTimer; 
-bool isTakingPhoto;
+
+
+QTimer* refreshTimer;  // ��ʱ�����ڶ�ʱˢ��ͼƬ
+bool isTakingPhoto;  // ��־������ʾ�Ƿ����ڽ������ղ���
 
 
 void insert_dlinklist(DLIST *d,char *s);
@@ -54,7 +52,7 @@ void Qt1::fun_refresh_label()
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
-	//  rb_manual->setChecked(true);
+//  rb_manual->setChecked(true);
         isCapOpen = false;
         isToSave = false;
         m_image = NULL;
@@ -63,8 +61,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	pb_prev->setDisabled(true);
 	pb_next->setDisabled(true);
     pb_del->setDisabled(true);
-
-	OpenButton->setDisabled(false);
+    OpenButton->setDisabled(false);
     TakeButton->setDisabled(false);
 	//timer = new QTimer(this);
 
@@ -76,14 +73,14 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 
 
 
-	//=====just for you to learn how to use comboBox=======
+//=====just for you to learn how to use comboBox=======
 	InitBox();
 	connect(&t3,SIGNAL(timeout()),this,SLOT(fun_refresh_label())); 
 	t3.start(10);
-	//=====just for you to learn how to use comboBox=======
-
-
-	connect(OpenButton,SIGNAL(clicked()),this,SLOT(fun_cap_open()));
+//=====just for you to learn how to use comboBox=======
+	
+	//connect(timer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));
+    connect(OpenButton,SIGNAL(clicked()),this,SLOT(fun_cap_open()));
     connect(TakeButton,SIGNAL(clicked()),this,SLOT(fun_take_photo()));
 	connect(rb_auto,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
 	connect(rb_manual,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
@@ -93,41 +90,37 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	connect(pb_open,SIGNAL(clicked()),this,SLOT(fun_open())); 	
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));
  	connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
-  	t1.start(1000);
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));
-	update_t.start(update_t_set);
-
-
+  	t1.start(1000);						//������ʱ�������?1s��ÿ��1s�ᷢ��һ���ź�����ʵ�����߱�
 	init_dlinklist(&head);
-    width = 640;
-    height = 480;
-    myCamera = new Camera("/dev/video0", width, height, 0);
-    frameBufRGB = new unsigned char[width * height * 3];
-    frameBufYUV = new unsigned char[width * height * 2];
+        width = 480;
+        height = 272;
+        myCamera = new Camera("/dev/video0", width, height, 0);
+        frameBufRGB = new unsigned char[width * height * 3];
+        frameBufYUV = new unsigned char[width * height * 2];
 }
 void Qt1::fun_refresh_pic()
 {
-	printf("refresh!!!!!!!!!!\n");
+    printf("refresh!!!!!!!!!!\n");
 	if (isTakingPhoto)
     {
         refreshTimer->stop();
     }
-   	if(!myCamera->GetBuffer(frameBufYUV))
-   	{
+   if(!myCamera->GetBuffer(frameBufYUV))
+   {
        std::cout<< "Get Camera Buf error!\n";
        return;
-   	}
+   }
    //TODO:process_image() function is now empty.
    myCamera->process_image(frameBufYUV, frameBufRGB);
    showCapPhoto();
-   
+
+
 }
 
 
 void Qt1::fun_cap_open()
 {
-    //TODO: Use myCamera->OpenDevice() to open camera, and myCamera->CloseDevice() to close it.
-	if (camera == 1)
+    if (camera == 1)
     {
         camera = 0;
         OpenButton->setText("Open");
@@ -153,10 +146,42 @@ void Qt1::fun_cap_open()
         // ���±�־����
         isTakingPhoto = false;
     }
-    //You should think of it in two cases: camera closed and camera opened.
-    //When you open camera, how to refresh image? Tips:use timer to trigge it.
 }
 
+
+
+
+// void Qt1::fun_cap_open()
+// {
+//     //TODO: Use myCamera->OpenDevice() to open camera, and myCamera->CloseDevice() to close it.
+//     //You should think of it in two cases: camera closed and camera opened.
+//     //When you open camera, how to refresh image? Tips:use timer to trigge it.
+//     if(camera==1)
+//     {
+//         camera=0;
+//         OpenButton->setText("Open");
+//         TakeButton->setDisabled(true);
+//         myCamera->CloseDevice();
+// 		printf("00000000000000\n");
+//     }
+//     else
+//     {
+//         camera=1;
+// 		FLAG=1;
+//         OpenButton->setText("Close");
+//         TakeButton->setDisabled(false);
+//         label->setText("photo");
+//         myCamera->OpenDevice();
+		
+// 		while(FLAG!=0)
+// 		{
+// 			fun_refresh_pic();
+// 			printf("111111111111111111\n");
+// 		}
+
+//     }
+
+// }
 
 void Qt1::fun_clean_pixmap()
 {
@@ -168,8 +193,8 @@ void Qt1::fun_clean_pixmap()
 
 void Qt1::fun_take_photo()
 {
-    // TODO:  When this button is clicked, we take a photo and save it.
- 	camera = 0;
+    // TODO: ���˰�ť�����ʱ�����ղ�����ͼƬ��
+    camera = 0;
     char filename[20];
     if (m_image != NULL)
     {
@@ -182,6 +207,25 @@ void Qt1::fun_take_photo()
     // ���±�־����
     isTakingPhoto = true;
 }
+
+
+
+
+// void Qt1::fun_take_photo()
+// {
+//     //TODO: When this button is clicked, we take a photo and save it.
+//     camera=0;
+// 	FLAG=0;
+// 	//fun_refresh_pic();
+//     char filename[20];
+//     if(m_image!=NULL){
+//         sprintf(filename,"mnt/usb/a%d.jpg",W++);
+//         printf("%s\n",filename);
+//         m_image->save(filename,"jpg",-1);
+//     }
+//     camera=1;
+
+// }
 
 
 void Qt1::showCapPhoto()
@@ -198,7 +242,7 @@ void Qt1::showCapPhoto()
 void Qt1::fun_time()
 {
     QDateTime d=QDateTime::currentDateTime();	//��ȡ��ǰʱ��,currentDateTime()��һ����̬����
-    lb_time->setText(d.toString("yyyy-MM-dd-ddd hh:mm:ss"));
+    lb_time->setText(d.toString("yyyy-MM-dd-ddd hh:mm:ss"));	
 }
 
 void Qt1::fun_cntl()
@@ -276,7 +320,7 @@ void Qt1::fun_delete()
 void Qt1::fun_open()//注意文件位置
 {
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                 "/mnt/disk/qrssy/photo2",
+                                                 "/mnt/usb",
                                                  tr("Images (*.png *.xpm *.jpg)"));
 	printf("open folder!\n");
 	if(fileName!=NULL)
@@ -332,9 +376,9 @@ void Qt1::fun_open()//注意文件位置
 		pb_next->setDisabled(false);
 		pb_del->setDisabled(false);
 		rb_manual->setChecked(true);
-	//		display_pic();
+//		display_pic();
 	}
-	//	dlinkilist_tofile(&head);
+//	dlinkilist_tofile(&head);
 }
 
 void Qt1::strip(char *s)
@@ -395,7 +439,7 @@ int Qt1::judge(char * s)
 void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮���԰���������ᵽ�������Ϊ����ʹ��ȫ�ֱ���DLIST *q
 {
 	DLIST *r=d;
-	//	DLIST *q;
+//	DLIST *q;
 	q=(DLIST*)malloc(sizeof(DLIST));	//�����q�����Ǿֲ��ģ������޷��γ�˫��ѭ������
 	memset(q,0,sizeof(q));
 	strcpy(q->path,s);
@@ -416,10 +460,6 @@ void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮�
 		q->next=NULL;
 	}
 	printf("insert success\n");
-}
-void Qt1::updateResistor(){
-	resistor.update();
-	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
 }
 
 

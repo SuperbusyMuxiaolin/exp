@@ -14,7 +14,7 @@
 #include <asm/types.h>          /* for videodev2.h */
 #include <linux/videodev2.h>
 #include "camera.h"
-#include "yuv2rgb.h"
+#include "yuv2rgb.cpp"
 int c_camera_type = 0;
 
 Camera::Camera(char *DEV_NAME, int w, int h, int camera_type)
@@ -36,8 +36,9 @@ Camera::~Camera(){
 }
 bool Camera::process_image(unsigned char* imageSrc,unsigned char * imageDst)
 {
-    YUV2RGB422(imageDst, imageSrc, width*height); 
-    return true;
+    // TODO:fill this function.
+    int w=width,h=height;
+    YUV2RGB422(imageDst,imageSrc,w*h);
 }
 unsigned int Camera::getImageSize(){
     return cap_image_size;

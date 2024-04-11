@@ -10,4 +10,5 @@ INCLUDEPATH += .
 # Input
 HEADERS += dlinklist.h qt1.h dlinklist.c
 FORMS += qt1.ui
-SOURCES += dlinklist.c main.cpp qt1.cpp
+SOURCES += dlinklist.c main.cpp qt1.cpp \
+    camera.cpp

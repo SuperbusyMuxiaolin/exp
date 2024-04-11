@@ -9,7 +9,6 @@
 #include <QTimer>
 #include <QImage>
 #include "camera.h"
-#include "Resistor.h"
 
 #include "ui_qt1.h"
 //#include "dlinklist.h"
@@ -40,14 +39,11 @@ public slots:
         void fun_take_photo();
         void fun_refresh_pic();
         void fun_refresh_label();
-        void updateResistor();
 	
 private:
         QTimer t1;	//
         QTimer t2;
         QTimer t3;
-        QTimer update_t;
-        Resistor resistor;
 	int len;
         bool isCapOpen;
         Camera* myCamera;
