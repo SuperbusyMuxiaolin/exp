@@ -16,7 +16,7 @@
 #include <fstream>
 #include <QDateTime>
 //#include <QImage>
-#include "qt1.h"
+#include "qt1.cpp"
 #include "dlinklist.c"
 
 using namespace std;
