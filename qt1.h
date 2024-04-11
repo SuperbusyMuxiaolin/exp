@@ -9,7 +9,7 @@
 #include <QTimer>
 #include <QImage>
 #include "camera.h"
-#include "Risistor.h"
+#include "Resistor.h"
 
 #include "ui_qt1.h"
 //#include "dlinklist.h"
@@ -47,7 +47,7 @@ private:
         QTimer t2;
         QTimer t3;
         QTimer update_t;
-        Risistor risistor;
+        Resistor resistor;
 	int len;
         bool isCapOpen;
         Camera* myCamera;

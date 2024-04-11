@@ -92,7 +92,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));
  	connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
   	t1.start(1000);
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateRisistor()));
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));
 	update_t.start(update_t_set);
 
 
@@ -415,8 +415,8 @@ void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮�
 	}
 	printf("insert success\n");
 }
-void Qt1::updateRisistor(){
-	risistor.update();
+void Qt1::updateResistor(){
+	resistor.update();
 	cout<<"阻值信息"<<risistor.getAlert()<<risistor.getResistance()<<endl;
 }
 
