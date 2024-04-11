@@ -20,6 +20,7 @@
 #include "dlinklist.c"		//����dlinklist.h������ʾundefined reference
 
 static int i=0;
+static int update_t_set=1000;
 int camera=0;
 int W=0;
 int FLAG=1;
@@ -90,7 +91,8 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	connect(pb_open,SIGNAL(clicked()),this,SLOT(fun_open())); 	
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));
  	connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
-  	t1.start(1000);						//������ʱ�������?1s��ÿ��1s�ᷢ��һ���ź�����ʵ�����߱�
+  	t1.start(1000);						//
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));
 	init_dlinklist(&head);
         width = 480;
         height = 272;
@@ -439,7 +441,7 @@ int Qt1::judge(char * s)
 void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮���԰���������ᵽ�������Ϊ����ʹ��ȫ�ֱ���DLIST *q
 {
 	DLIST *r=d;
-//	DLIST *q;
+	//	DLIST *q;
 	q=(DLIST*)malloc(sizeof(DLIST));	//�����q�����Ǿֲ��ģ������޷��γ�˫��ѭ������
 	memset(q,0,sizeof(q));
 	strcpy(q->path,s);
@@ -460,6 +462,10 @@ void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮�
 		q->next=NULL;
 	}
 	printf("insert success\n");
+}
+void Qt1::updateResistor(){
+	resistor.update();
+	cout<<"组织信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
 }
 
 
