@@ -40,7 +40,7 @@ public slots:
         void fun_take_photo();
         void fun_refresh_pic();
         void fun_refresh_label();
-        void updateRisistor();
+        void updateResistor();
 	
 private:
         QTimer t1;	//
