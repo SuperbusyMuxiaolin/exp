@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qt1.h'
 **
-** Created: Sat Mar 16 11:10:04 2024
+** Created: Sat Apr 13 19:52:42 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Qt1[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,24 +33,19 @@ static const uint qt_meta_data_Qt1[] = {
  // slots: signature, parameters, type, tag, flags
        5,    4,    4,    4, 0x0a,
       16,    4,    4,    4, 0x0a,
-      26,    4,    4,    4, 0x0a,
-      37,    4,    4,    4, 0x0a,
-      51,    4,    4,    4, 0x0a,
-      62,    4,    4,    4, 0x0a,
-      75,    4,    4,    4, 0x0a,
-      86,    4,    4,    4, 0x0a,
-     101,    4,    4,    4, 0x0a,
-     118,    4,    4,    4, 0x0a,
-     136,    4,    4,    4, 0x0a,
+      27,    4,    4,    4, 0x0a,
+      42,    4,    4,    4, 0x0a,
+      59,    4,    4,    4, 0x0a,
+      77,    4,    4,    4, 0x0a,
+      94,    4,    4,    4, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Qt1[] = {
-    "Qt1\0\0fun_time()\0fun_pic()\0fun_cntl()\0"
-    "display_pic()\0fun_prev()\0fun_delete()\0"
-    "fun_open()\0fun_cap_open()\0fun_take_photo()\0"
-    "fun_refresh_pic()\0fun_refresh_label()\0"
+    "Qt1\0\0fun_time()\0fun_open()\0fun_cap_open()\0"
+    "fun_take_photo()\0fun_refresh_pic()\0"
+    "updateResistor()\0fun_showResistor()\0"
 };
 
 const QMetaObject Qt1::staticMetaObject = {
@@ -85,19 +80,15 @@ int Qt1::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: fun_time(); break;
-        case 1: fun_pic(); break;
-        case 2: fun_cntl(); break;
-        case 3: display_pic(); break;
-        case 4: fun_prev(); break;
-        case 5: fun_delete(); break;
-        case 6: fun_open(); break;
-        case 7: fun_cap_open(); break;
-        case 8: fun_take_photo(); break;
-        case 9: fun_refresh_pic(); break;
-        case 10: fun_refresh_label(); break;
+        case 1: fun_open(); break;
+        case 2: fun_cap_open(); break;
+        case 3: fun_take_photo(); break;
+        case 4: fun_refresh_pic(); break;
+        case 5: updateResistor(); break;
+        case 6: fun_showResistor(); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 7;
     }
     return _id;
 }

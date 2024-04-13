@@ -44,10 +44,10 @@ void Qt1::InitBox()
     comboBox->addItems(strList);
 }
 
-void Qt1::fun_refresh_label()
-{
-	lb_sum->setText(comboBox->currentText());
-}
+// void Qt1::fun_refresh_label()
+// {
+// 	lb_sum->setText(comboBox->currentText());
+// }
 //=====just for you to learn how to use comboBox=======
 
 Qt1::Qt1(QWidget *parent):QDialog(parent)
@@ -57,13 +57,13 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     isCapOpen = false;
     isToSave = false;
     m_image = NULL;
-	rb_manual->setDisabled(true);
-	rb_auto->setDisabled(true);
-	pb_prev->setDisabled(true);
-	pb_next->setDisabled(true);
-    pb_del->setDisabled(true);
+	//rb_manual->setDisabled(true);
+	//rb_auto->setDisabled(true);
+	//pb_prev->setDisabled(true);
+	//pb_next->setDisabled(true);
+    //pb_del->setDisabled(true);
     OpenButton->setDisabled(false);
-    TakeButton->setDisabled(false);
+    //TakeButton->setDisabled(false);
 
 
 	refreshTimer = new QTimer(this);
@@ -87,7 +87,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	//connect(pb_next,SIGNAL(clicked()),this,SLOT(fun_pic())); 
 	//connect(pb_del,SIGNAL(clicked()),this,SLOT(fun_delete())); 
 
-	connect(pc_listButton,SIGNAL(clicked()),this,SLOT(fun_open())); 	
+	connect(pic_listButton,SIGNAL(clicked()),this,SLOT(fun_open())); 	
 	
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));//时间显示
 	t1.start(1000);//时间显示每一秒触发一次，即以秒进行更新
@@ -130,7 +130,7 @@ void Qt1::fun_cap_open()
     {
         camera = 0;
         OpenButton->setText("Open");
-        TakeButton->setDisabled(true);
+        //TakeButton->setDisabled(true);
         myCamera->CloseDevice();
         printf("00000000000000\n");
         refreshTimer->stop();
@@ -139,8 +139,8 @@ void Qt1::fun_cap_open()
     {
         camera = 1;
         OpenButton->setText("Close");
-        TakeButton->setDisabled(false);
-        label->setText("photo");
+        //TakeButton->setDisabled(false);
+        //label->setText("photo");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
         refreshTimer->start(1000);  
@@ -319,15 +319,15 @@ void Qt1::fun_open()//注意文件位置
 		}
 		p=r;
 		i=pos;
-		lb_num->setText(QString::number(i));
-		lb_sum->setText(QString::number(len));
+		//lb_num->setText(QString::number(i));
+		//lb_sum->setText(QString::number(len));
 		
-		rb_manual->setDisabled(false);
-		rb_auto->setDisabled(false);
-		pb_prev->setDisabled(false);
-		pb_next->setDisabled(false);
-		pb_del->setDisabled(false);
-		rb_manual->setChecked(true);
+		//rb_manual->setDisabled(false);
+		//rb_auto->setDisabled(false);
+		//pb_prev->setDisabled(false);
+		//pb_next->setDisabled(false);
+		//pb_del->setDisabled(false);
+		//rb_manual->setChecked(true);
 //		display_pic();
 	}
 //	dlinkilist_tofile(&head);

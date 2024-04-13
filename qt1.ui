@@ -73,14 +73,14 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label_resistor">
+     <widget class="QLabel" name="lb_resistor">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_warning">
+     <widget class="QLabel" name="lb_warning">
       <property name="text">
        <string/>
       </property>

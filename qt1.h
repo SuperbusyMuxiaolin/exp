@@ -29,16 +29,16 @@ signals:
 	
 public slots:
 	void fun_time();
-	void fun_pic();
-	void fun_cntl();
-	void display_pic();
-	void fun_prev();
-	void fun_delete();
+	//void fun_pic();
+	//void fun_cntl();
+	//void display_pic();
+	//void fun_prev();
+	//void fun_delete();
 	void fun_open();
         void fun_cap_open();
         void fun_take_photo();
         void fun_refresh_pic();
-        void fun_refresh_label();
+        //void fun_refresh_label();
         void updateResistor();
         void fun_showResistor();
 	
