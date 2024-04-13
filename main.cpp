@@ -11,6 +11,7 @@ int main(int argc, char** argv)
 	//app.setFont(QFont("simsun", 10));
 
 	Qt1 MD;
+    MD.setWindowTitle("Resistance Video Monitoring System");
     MD.show();
 	// MD.setDefaultWeight();
 	return app.exec();

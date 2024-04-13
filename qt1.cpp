@@ -37,68 +37,44 @@ bool isTakingPhoto;
 
 
 void insert_dlinklist(DLIST *d,char *s);
-//=====just for you to learn how to use comboBox=======
-void Qt1::InitBox()
-{
-    comboBox->clear();
-    QStringList strList;
-    strList<<"aaa"<<"bbb"<<"ccc";
-    comboBox->addItems(strList);
-}
-
-// void Qt1::fun_refresh_label()
-// {
-// 	lb_sum->setText(comboBox->currentText());
-// }
-//=====just for you to learn how to use comboBox=======
 
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
-//  rb_manual->setChecked(true);
     isCapOpen = false;
     isToSave = false;
     m_image = NULL;
-	//rb_manual->setDisabled(true);
-	//rb_auto->setDisabled(true);
-	//pb_prev->setDisabled(true);
-	//pb_next->setDisabled(true);
-    //pb_del->setDisabled(true);
     OpenButton->setDisabled(false);
-    //TakeButton->setDisabled(false);
+
+    //报警信息按钮不可按
+    warnButton1->setDisable(true);
+    warnButton2->setDisable(true);
+
+
+    //设置更新时间选择窗
+    tSpinBox->setRange(0.4,2);
+    tSpinBox->setSingleStep(0.2);
+    tSpinBox->setValue(1);
+    tSpinBox->setPrefix("Time:");
+    tSpinBox->setSuffix("s");
+    tSpinBox->setWrapping(true);
+    connect(tSpinBox,SIGNAL(valueChanged(double)),this,SLOT(fun_change_t()));
+
+
 
 
 	refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
     isTakingPhoto = false;
 
-
-
-
-//=====just for you to learn how to use comboBox=======
-	InitBox();
-	connect(&t3,SIGNAL(timeout()),this,SLOT(fun_refresh_label())); 
-	t3.start(10);
-//=====just for you to learn how to use comboBox=======
-	
     connect(OpenButton,SIGNAL(clicked()),this,SLOT(fun_cap_open()));
-    //connect(TakeButton,SIGNAL(clicked()),this,SLOT(fun_take_photo()));
-	//connect(rb_auto,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
-	//connect(rb_manual,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
-	//connect(pb_prev,SIGNAL(clicked()),this,SLOT(fun_prev())); 
-	//connect(pb_next,SIGNAL(clicked()),this,SLOT(fun_pic())); 
-	//connect(pb_del,SIGNAL(clicked()),this,SLOT(fun_delete())); 
-
 	connect(pic_listButton,SIGNAL(clicked()),this,SLOT(fun_open())); 	
-	
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));//时间显示
-	t1.start(1000);//时间显示每一秒触发一次，即以秒进行更新
+	t1.start(1000);//时间显示每一秒触发一次，即以秒进行时间显示更新
 
- 	//connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
-	//update_t.start(update_t_set);
 	init_dlinklist(&head);
         width = 480;
         height = 272;
@@ -106,6 +82,10 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
         frameBufRGB = new unsigned char[width * height * 3];
         frameBufYUV = new unsigned char[width * height * 2];
 }
+void Qt1::fun_change_t(){
+    update_t_set=1000*tSpinBox->value();
+}
+
 void Qt1::fun_refresh_pic()
 {
     printf("refresh!!!!!!!!!!\n");
@@ -129,24 +109,20 @@ void Qt1::fun_cap_open()
     {
         camera = 0;
         OpenButton->setText("Open");
-        //TakeButton->setDisabled(true);
         myCamera->CloseDevice();
         printf("00000000000000\n");
         refreshTimer->stop();
-		update_t.stop();
-		
+		update_t.stop();//相机处于关闭状态，数据更新及获取停止
     }
     else
     {
         camera = 1;
         OpenButton->setText("Close");
-        //TakeButton->setDisabled(false);
-        //label->setText("photo");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
         refreshTimer->start(1000);  
         isTakingPhoto = false;
-		update_t.start(update_t_set);
+		update_t.start(update_t_set);//相机处于打开状态，数据更新及获取开始，按update_t_set为间隔获取
     }
 }
 
@@ -195,81 +171,14 @@ void Qt1::fun_showResistor(){
 	QString r = QString::number(resistor.getResistance());
 	lb_resistor->setText(r);
 	lb_warning->setText(resistor.getAlert());
+    if(1000<r<9000){
+        warnButton2->setStyleSheet("background-color: Green; color: white;");
+    }
+    else{
+        warnButton2->setStyleSheet("background-color: Red; color: white;");
+    }
 
 }
-
-
-// void Qt1::fun_cntl()
-// {
-// 	if(rb_manual->isChecked ())
-// 	{
-// 		t2.stop();
-// 		pb_prev->setEnabled(true);	
-// 		pb_next->setEnabled(true);	
-// 	}
-// 	else if(rb_auto->isChecked ())
-// 	{
-// 		t2.start(100);
-// 		pb_prev->setEnabled(false);	
-// 		pb_next->setEnabled(false);	
-// 	}
-// }
-
-// void Qt1::fun_pic()		
-// {
-// 	i++;
-// 	if(i==(len+1))i=1;
-
-// 	p=p->next;
-// 	display_pic();
-// }
-
-
-// void Qt1::fun_prev()	//fun_next()和fun_pic()一样
-// {
-// 	i--;
-// 	if(i==0)i=len;
-
-// 	p=p->prev;
-// 	display_pic();
-// }
-
-// void Qt1::display_pic()
-// {
-// 	QString buf(p->path);
-// 	QPixmap p(buf);
-// 	lb_pic->setPixmap(p);
-// 	lb_pic->setScaledContents(1);
-// 	lb_num->setText(QString::number(i));
-// 	lb_sum->setText(QString::number(len));
-// }
-
-
-// void Qt1::fun_delete()
-// {
-// 	int ret;
-//         ret=QMessageBox::warning(this, tr("m_image browser"),
-// 					   tr("Are you sure to delete it?"),
-// 					   QMessageBox::Yes | QMessageBox::No,
-// 					   QMessageBox::No);
-// 	if(ret==QMessageBox::Yes)
-// 	{
-// 		remove(p->path);
-// 		DLIST *r=(&head)->next;
-// 		int n=1;
-// 		while(r!=p)		//�ҵ���ǰ p��λ��
-// 		{
-// 			n++;
-// 			r=r->next;
-// 		}
-// 		p=p->next;
-// 		del_dlinklist(&head,n);
-// 		if(i==len)i--;
-// 		len=legnth_dlinklist(&head);
-// 		display_pic();
-// 	}
-// //	dlinkilist_tofile(&head);
-// }
 
 void Qt1::fun_open()//注意文件位置
 {
@@ -279,11 +188,11 @@ void Qt1::fun_open()//注意文件位置
 	printf("open folder!\n");
 	if(fileName!=NULL)
 	{
-		init_dlinklist(&head);	//Ϊ����һ��Ŀ¼��׼��
+		init_dlinklist(&head);	
 		char *str;
 		char filename[100]={0};
-		DIR *dp;					//ָ��Ŀ¼
-		struct dirent *dirp;		//ָ��Ŀ¼��(��������Ŀ¼����ͨ�ļ�)
+		DIR *dp;					
+		struct dirent *dirp;		
 		
 		int m=strlen(fileName.toAscii().data());
 		str=(char*)malloc(m);
@@ -302,7 +211,7 @@ void Qt1::fun_open()//注意文件位置
 			if(judge(dirp->d_name)==1)
 			{
 				strcat(filename,"/");
-				strcat(filename,dirp->d_name);	//�ļ����ڵ�Ŀ¼+�ļ���=����·��
+				strcat(filename,dirp->d_name);
 				printf("%s\n",filename);
 				insert_dlinklist(&head,filename);
 				filename[strlen(filename)-strlen(dirp->d_name)-1]='\0';
@@ -321,17 +230,7 @@ void Qt1::fun_open()//注意文件位置
 		}
 		p=r;
 		i=pos;
-		//lb_num->setText(QString::number(i));
-		//lb_sum->setText(QString::number(len));
-		
-		//rb_manual->setDisabled(false);
-		//rb_auto->setDisabled(false);
-		//pb_prev->setDisabled(false);
-		//pb_next->setDisabled(false);
-		//pb_del->setDisabled(false);
-		//rb_manual->setChecked(true);
 	}
-//	dlinkilist_tofile(&head);
 }
 
 void Qt1::strip(char *s)
@@ -389,11 +288,9 @@ int Qt1::judge(char * s)
 	}
 }
 
-void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮���԰���������ᵽ�������Ϊ����ʹ��ȫ�ֱ���DLIST *q
-{
+void insert_dlinklist(DLIST *d,char *s)	{
 	DLIST *r=d;
-	//	DLIST *q;
-	q=(DLIST*)malloc(sizeof(DLIST));	//�����q�����Ǿֲ��ģ������޷��γ�˫��ѭ������
+	q=(DLIST*)malloc(sizeof(DLIST));	
 	memset(q,0,sizeof(q));
 	strcpy(q->path,s);
 
@@ -416,7 +313,7 @@ void insert_dlinklist(DLIST *d,char *s)	//������ĩβ����,֮�
 }
 void Qt1::updateResistor(){
 	resistor.update();
-	cout<<"组织信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
+	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
 }
 
 

@@ -28,19 +28,14 @@ signals:
 //	mysig();
 	
 public slots:
-	void fun_time();
-	//void fun_pic();
-	//void fun_cntl();
-	//void display_pic();
-	//void fun_prev();
-	//void fun_delete();
-	void fun_open();
+        void fun_time();
+        void fun_open();
         void fun_cap_open();
         void fun_take_photo();
         void fun_refresh_pic();
-        //void fun_refresh_label();
         void updateResistor();
         void fun_showResistor();
+        void fun_change_t();//改变更新时间
 	
 private:
         QTimer t1;	//用于更新时间
@@ -49,7 +44,7 @@ private:
         QTimer update_t;        //用于更新电阻及其报警信息
 
         Resistor resistor;
-	int len;
+        int len;
         bool isCapOpen;
         Camera* myCamera;
         int width;
@@ -59,7 +54,6 @@ private:
         unsigned char *frameBufYUV;
         bool isToSave;
         void fun_clean_pixmap();
-        void InitBox();
 };
 
 
