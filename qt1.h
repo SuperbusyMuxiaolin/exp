@@ -45,7 +45,7 @@ public slots:
 private:
         QTimer t1;	//用于更新时间
         QTimer t2;      
-        QTimer t3;      //用于更新label
+        QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
 
         Resistor resistor;

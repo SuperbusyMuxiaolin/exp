@@ -98,7 +98,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
-	update_t.start(update_t_set);
+	//update_t.start(update_t_set);
 	init_dlinklist(&head);
         width = 480;
         height = 272;
@@ -133,6 +133,8 @@ void Qt1::fun_cap_open()
         myCamera->CloseDevice();
         printf("00000000000000\n");
         refreshTimer->stop();
+		update_t.stop();
+		
     }
     else
     {
@@ -142,8 +144,9 @@ void Qt1::fun_cap_open()
         //label->setText("photo");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
-        refreshTimer->start(100);  
+        refreshTimer->start(1000);  
         isTakingPhoto = false;
+		update_t.start(update_t_set);
     }
 }
 
