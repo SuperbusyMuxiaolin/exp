@@ -17,6 +17,7 @@
 #include <QDateTime>
 //#include <QImage>
 #include "qt1.h"
+
 #include "dlinklist.c"	
 using namespace std;
 
@@ -30,8 +31,9 @@ DLIST *p;
 DLIST *q;
 DLIST head;
 
-QTimer* refreshTimer;  // 
-bool isTakingPhoto;  // 
+
+QTimer* refreshTimer; 
+bool isTakingPhoto; 
 
 
 void insert_dlinklist(DLIST *d,char *s);
@@ -92,7 +94,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
   	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));//时间显示
 	t1.start(1000);//时间显示每一秒触发一次，即以秒进行更新
 
- 	//connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); //窗口更新动态图像
+ 	//connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
@@ -116,11 +118,8 @@ void Qt1::fun_refresh_pic()
        std::cout<< "Get Camera Buf error!\n";
        return;
    }
-   //TODO:process_image() function is now empty.
    myCamera->process_image(frameBufYUV, frameBufRGB);
    showCapPhoto();
-
-
 }
 
 
@@ -143,7 +142,7 @@ void Qt1::fun_cap_open()
         //label->setText("photo");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
-        refreshTimer->start(1000);  
+        refreshTimer->start(100);  
         isTakingPhoto = false;
     }
 }
@@ -328,7 +327,6 @@ void Qt1::fun_open()//注意文件位置
 		//pb_next->setDisabled(false);
 		//pb_del->setDisabled(false);
 		//rb_manual->setChecked(true);
-//		display_pic();
 	}
 //	dlinkilist_tofile(&head);
 }
