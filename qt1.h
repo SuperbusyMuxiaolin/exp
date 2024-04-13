@@ -40,12 +40,13 @@ public slots:
         void fun_refresh_pic();
         void fun_refresh_label();
         void updateResistor();
+        void fun_showResistor();
 	
 private:
-        QTimer t1;	//
-        QTimer t2;
-        QTimer t3;
-        QTimer update_t;
+        QTimer t1;	//用于更新时间
+        QTimer t2;      
+        QTimer t3;      //用于更新label
+        QTimer update_t;        //用于更新电阻及其报警信息
 
         Resistor resistor;
 	int len;

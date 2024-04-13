@@ -30,9 +30,8 @@ DLIST *p;
 DLIST *q;
 DLIST head;
 
-
-QTimer* refreshTimer;  // ��ʱ�����ڶ�ʱˢ��ͼƬ
-bool isTakingPhoto;  // ��־������ʾ�Ƿ����ڽ������ղ���
+QTimer* refreshTimer;  // 
+bool isTakingPhoto;  // 
 
 
 void insert_dlinklist(DLIST *d,char *s);
@@ -55,9 +54,9 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
 //  rb_manual->setChecked(true);
-        isCapOpen = false;
-        isToSave = false;
-        m_image = NULL;
+    isCapOpen = false;
+    isToSave = false;
+    m_image = NULL;
 	rb_manual->setDisabled(true);
 	rb_auto->setDisabled(true);
 	pb_prev->setDisabled(true);
@@ -65,11 +64,10 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     pb_del->setDisabled(true);
     OpenButton->setDisabled(false);
     TakeButton->setDisabled(false);
-	//timer = new QTimer(this);
 
 
 	refreshTimer = new QTimer(this);
-    connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));
+    connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
     isTakingPhoto = false;
 
 
@@ -81,19 +79,23 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	t3.start(10);
 //=====just for you to learn how to use comboBox=======
 	
-	//connect(timer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));
     connect(OpenButton,SIGNAL(clicked()),this,SLOT(fun_cap_open()));
-    connect(TakeButton,SIGNAL(clicked()),this,SLOT(fun_take_photo()));
-	connect(rb_auto,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
-	connect(rb_manual,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
-	connect(pb_prev,SIGNAL(clicked()),this,SLOT(fun_prev())); 
-	connect(pb_next,SIGNAL(clicked()),this,SLOT(fun_pic())); 
-	connect(pb_del,SIGNAL(clicked()),this,SLOT(fun_delete())); 	
-	connect(pb_open,SIGNAL(clicked()),this,SLOT(fun_open())); 	
-  	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));
- 	connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); 
-  	t1.start(1000);						//
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));
+    //connect(TakeButton,SIGNAL(clicked()),this,SLOT(fun_take_photo()));
+	//connect(rb_auto,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
+	//connect(rb_manual,SIGNAL(clicked()),this,SLOT(fun_cntl())); 
+	//connect(pb_prev,SIGNAL(clicked()),this,SLOT(fun_prev())); 
+	//connect(pb_next,SIGNAL(clicked()),this,SLOT(fun_pic())); 
+	//connect(pb_del,SIGNAL(clicked()),this,SLOT(fun_delete())); 
+
+	connect(pc_listButton,SIGNAL(clicked()),this,SLOT(fun_open())); 	
+	
+  	connect(&t1,SIGNAL(timeout()),this,SLOT(fun_time()));//时间显示
+	t1.start(1000);//时间显示每一秒触发一次，即以秒进行更新
+
+ 	//connect(&t2,SIGNAL(timeout()),this,SLOT(fun_pic())); //窗口更新动态图像
+  	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
 	update_t.start(update_t_set);
 	init_dlinklist(&head);
         width = 480;
@@ -131,8 +133,6 @@ void Qt1::fun_cap_open()
         TakeButton->setDisabled(true);
         myCamera->CloseDevice();
         printf("00000000000000\n");
-
-        // ֹͣ��ʱ��
         refreshTimer->stop();
     }
     else
@@ -143,49 +143,11 @@ void Qt1::fun_cap_open()
         label->setText("photo");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
-
-        // ������ʱ����ÿ��һ��ʱ��ˢ��ͼƬ
-        refreshTimer->start(1000);  // ÿ��1��ˢ��һ��
-
-        // ���±�־����
+        refreshTimer->start(1000);  
         isTakingPhoto = false;
     }
 }
 
-
-
-
-// void Qt1::fun_cap_open()
-// {
-//     //TODO: Use myCamera->OpenDevice() to open camera, and myCamera->CloseDevice() to close it.
-//     //You should think of it in two cases: camera closed and camera opened.
-//     //When you open camera, how to refresh image? Tips:use timer to trigge it.
-//     if(camera==1)
-//     {
-//         camera=0;
-//         OpenButton->setText("Open");
-//         TakeButton->setDisabled(true);
-//         myCamera->CloseDevice();
-// 		printf("00000000000000\n");
-//     }
-//     else
-//     {
-//         camera=1;
-// 		FLAG=1;
-//         OpenButton->setText("Close");
-//         TakeButton->setDisabled(false);
-//         label->setText("photo");
-//         myCamera->OpenDevice();
-		
-// 		while(FLAG!=0)
-// 		{
-// 			fun_refresh_pic();
-// 			printf("111111111111111111\n");
-// 		}
-
-//     }
-
-// }
 
 void Qt1::fun_clean_pixmap()
 {
@@ -197,7 +159,6 @@ void Qt1::fun_clean_pixmap()
 
 void Qt1::fun_take_photo()
 {
-    // TODO: ���˰�ť�����ʱ�����ղ�����ͼƬ��
     camera = 0;
     char filename[20];
     if (m_image != NULL)
@@ -207,30 +168,8 @@ void Qt1::fun_take_photo()
         m_image->save(filename, "jpg", -1);
     }
     camera = 1;
-
-    // ���±�־����
     isTakingPhoto = true;
 }
-
-
-
-
-// void Qt1::fun_take_photo()
-// {
-//     //TODO: When this button is clicked, we take a photo and save it.
-//     camera=0;
-// 	FLAG=0;
-// 	//fun_refresh_pic();
-//     char filename[20];
-//     if(m_image!=NULL){
-//         sprintf(filename,"mnt/usb/a%d.jpg",W++);
-//         printf("%s\n",filename);
-//         m_image->save(filename,"jpg",-1);
-//     }
-//     camera=1;
-
-// }
-
 
 void Qt1::showCapPhoto()
 {
@@ -245,81 +184,90 @@ void Qt1::showCapPhoto()
 
 void Qt1::fun_time()
 {
-    QDateTime d=QDateTime::currentDateTime();	//��ȡ��ǰʱ��,currentDateTime()��һ����̬����
+    QDateTime d=QDateTime::currentDateTime();	
     lb_time->setText(d.toString("yyyy-MM-dd-ddd hh:mm:ss"));	
 }
 
-void Qt1::fun_cntl()
-{
-	if(rb_manual->isChecked ())
-	{
-		t2.stop();
-		pb_prev->setEnabled(true);	
-		pb_next->setEnabled(true);	
-	}
-	else if(rb_auto->isChecked ())
-	{
-		t2.start(100);
-		pb_prev->setEnabled(false);	
-		pb_next->setEnabled(false);	
-	}
-}
+//显示阻值和报警信息
+void Qt1::fun_showResistor(){
+	QString r = QString::number(resistor.getResistance());
+	lb_resistor->setText(r);
+	lb_warning->setText(resistor.getAlert());
 
-void Qt1::fun_pic()		
-{
-	i++;
-	if(i==(len+1))i=1;
-
-	p=p->next;
-	display_pic();
 }
 
 
-void Qt1::fun_prev()	//fun_next()��fun_pic()һ��
-{
-	i--;
-	if(i==0)i=len;
+// void Qt1::fun_cntl()
+// {
+// 	if(rb_manual->isChecked ())
+// 	{
+// 		t2.stop();
+// 		pb_prev->setEnabled(true);	
+// 		pb_next->setEnabled(true);	
+// 	}
+// 	else if(rb_auto->isChecked ())
+// 	{
+// 		t2.start(100);
+// 		pb_prev->setEnabled(false);	
+// 		pb_next->setEnabled(false);	
+// 	}
+// }
 
-	p=p->prev;
-	display_pic();
-}
+// void Qt1::fun_pic()		
+// {
+// 	i++;
+// 	if(i==(len+1))i=1;
 
-void Qt1::display_pic()
-{
-	QString buf(p->path);
-	QPixmap p(buf);
-	lb_pic->setPixmap(p);
-	lb_pic->setScaledContents(1);
-	lb_num->setText(QString::number(i));
-	lb_sum->setText(QString::number(len));
-}
+// 	p=p->next;
+// 	display_pic();
+// }
 
 
-void Qt1::fun_delete()
-{
-	int ret;
-        ret=QMessageBox::warning(this, tr("m_image browser"),
-					   tr("Are you sure to delete it?"),
-					   QMessageBox::Yes | QMessageBox::No,
-					   QMessageBox::No);
-	if(ret==QMessageBox::Yes)
-	{
-		remove(p->path);
-		DLIST *r=(&head)->next;
-		int n=1;
-		while(r!=p)		//�ҵ���ǰ p��λ��
-		{
-			n++;
-			r=r->next;
-		}
-		p=p->next;
-		del_dlinklist(&head,n);
-		if(i==len)i--;
-		len=legnth_dlinklist(&head);
-		display_pic();
-	}
-//	dlinkilist_tofile(&head);
-}
+// void Qt1::fun_prev()	//fun_next()和fun_pic()一样
+// {
+// 	i--;
+// 	if(i==0)i=len;
+
+// 	p=p->prev;
+// 	display_pic();
+// }
+
+// void Qt1::display_pic()
+// {
+// 	QString buf(p->path);
+// 	QPixmap p(buf);
+// 	lb_pic->setPixmap(p);
+// 	lb_pic->setScaledContents(1);
+// 	lb_num->setText(QString::number(i));
+// 	lb_sum->setText(QString::number(len));
+// }
+
+
+// void Qt1::fun_delete()
+// {
+// 	int ret;
+//         ret=QMessageBox::warning(this, tr("m_image browser"),
+// 					   tr("Are you sure to delete it?"),
+// 					   QMessageBox::Yes | QMessageBox::No,
+// 					   QMessageBox::No);
+// 	if(ret==QMessageBox::Yes)
+// 	{
+// 		remove(p->path);
+// 		DLIST *r=(&head)->next;
+// 		int n=1;
+// 		while(r!=p)		//�ҵ���ǰ p��λ��
+// 		{
+// 			n++;
+// 			r=r->next;
+// 		}
+// 		p=p->next;
+// 		del_dlinklist(&head,n);
+// 		if(i==len)i--;
+// 		len=legnth_dlinklist(&head);
+// 		display_pic();
+// 	}
+// //	dlinkilist_tofile(&head);
+// }
 
 void Qt1::fun_open()//注意文件位置
 {
