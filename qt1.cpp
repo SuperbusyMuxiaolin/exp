@@ -15,7 +15,6 @@
 #include <QDebug>
 #include <fstream>
 #include <QDateTime>
-//#include <QImage>
 #include "qt1.h"
 
 #include "dlinklist.c"	
@@ -25,7 +24,6 @@ static int i=0;
 int update_t_set=500;
 int camera=0;
 int W=0;
-//int FLAG=1;
 DLIST *p;
 DLIST *q;
 DLIST head;
@@ -40,14 +38,19 @@ void insert_dlinklist(DLIST *d,char *s);
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
-    //isCapOpen = false;
-    //isToSave = false;
+    //固定窗口大小
+    this->setMinimumSize(480,272);
+    this->setMaximumSize(480,272);
     m_image = NULL;
     OpenButton->setDisabled(false);
 
     //报警信息按钮不可按
     warnButton1->setDisabled(true);
     warnButton2->setDisabled(true);
+
+    //看上下图片不可用
+    pb_prev->setDisabled(true);
+    pb_next->setDisabled(true);
 
 
     //设置更新时间选择窗
@@ -65,6 +68,9 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
     isTakingPhoto = false;
+    //看上下图片
+    connect(pb_prev,SIGNAL(clicked()),this,SLOT(fun_prev()));
+    connect(pb_next,SIGNAL(clicked()),this,SLOT(fun_pic()));
 
     connect(OpenButton,SIGNAL(clicked()),this,SLOT(fun_cap_open()));
 	connect(pic_listButton,SIGNAL(clicked()),this,SLOT(fun_open())); 	
@@ -106,7 +112,23 @@ void Qt1::fun_refresh_pic()
    showCapPhoto();
 }
 
+void Qt1::fun_pic()
+{
+    i++;
+    if(i==(len+1))i=1;
 
+    p=p->next;
+    display_pic();
+}
+
+void Qt1::fun_prev()
+{
+    i--;
+    if(i==0)i=len;
+
+    p=p->prev;
+    display_pic();
+}
 void Qt1::fun_cap_open()
 {
     if (camera == 1)
@@ -223,6 +245,7 @@ void Qt1::fun_open()//注意文件位置
 				filename[strlen(filename)-strlen(dirp->d_name)-1]='\0';
 			}	
 		}
+
 		q->next=(&head)->next;
 		(&head)->next->prev=q;
 		
@@ -236,6 +259,10 @@ void Qt1::fun_open()//注意文件位置
 		}
 		p=r;
 		i=pos;
+        lb_num->setText(QString::number(i));
+        lb_sum->setText(QString::number(len));
+        pb_prev->setDisabled(false);
+        pb_next->setDisabled(false);
 	}
 }
 
@@ -328,6 +355,8 @@ void Qt1::display_pic()
 	QPixmap p(buf);
 	lb_pic->setPixmap(p);
 	lb_pic->setScaledContents(1);
+    lb_num->setText(QString::number(i));
+    lb_sum->setText(QString::number(len));
 
 }
 

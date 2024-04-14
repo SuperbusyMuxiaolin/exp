@@ -6,8 +6,8 @@ historyr::historyr(QWidget *parent) :
     ui(new Ui::historyr)
 {
     ui->setupUi(this);
-    width = 480;
-	height = 272;
+    this->setMinimumSize(480,272);
+    this->setMaximumSize(480,272);
     connect(ui->BackButton,SIGNAL(clicked()),this,SLOT(fun_close()));
 
 }

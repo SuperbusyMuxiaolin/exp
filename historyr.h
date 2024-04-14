@@ -19,9 +19,6 @@ public slots:
 
 private:
     Ui::historyr *ui;
-    int width;
-    int height;
-
 };
 
 #endif // HISTORYR_H

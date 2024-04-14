@@ -40,6 +40,8 @@ public slots:
         void fun_change_t();//改变更新时间
         void fun_open_resistor();
         void display_pic();
+        void fun_prev();
+        void fun_pic();
 	
 private:
         QTimer t1;	//用于更新时间
