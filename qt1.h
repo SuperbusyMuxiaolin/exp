@@ -38,6 +38,8 @@ public slots:
         void updateResistor();
         void fun_showResistor();
         void fun_change_t();//改变更新时间
+        void fun_open_resistor();
+        void display_pic();
 	
 private:
         QTimer t1;	//用于更新时间

@@ -71,20 +71,20 @@ int Camera::read_frame(unsigned char *image) {
     if (-1 == xioctl(fd, VIDIOC_DQBUF, &buf)) {
         switch (errno) {
         case EAGAIN:
-		printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+		//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
             return 0;
         case EIO:
-		printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+		//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
             /* Could ignore EIO, see spec. */
             /* fall through */
         default:
-		printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+		//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
             errno_exit("VIDIOC_DQBUF");
         }
     }
-	printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+	//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
     assert(buf.index < n_buffers);
-	printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+	//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
     memcpy(image,buffers[0].start,cap_image_size);
     if (-1 == xioctl(fd, VIDIOC_QBUF, &buf))
         errno_exit("VIDIOC_QBUF");
@@ -108,7 +108,7 @@ void Camera::stop_capturing(void) {
 bool Camera::start_capturing(void) {
     unsigned int i;
     enum v4l2_buf_type type;
-	printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+	//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
     for (i = 0; i < n_buffers; ++i) {
         struct v4l2_buffer buf;
         CLEAR (buf);
@@ -117,17 +117,17 @@ bool Camera::start_capturing(void) {
         buf.index = i;
         if (-1 == xioctl(fd, VIDIOC_QBUF, &buf))
 	{
-		printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+		//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
             return false;
 	}
     }
     type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     if (-1 == xioctl(fd, VIDIOC_STREAMON, &type))
     {
-	printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+	//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
         return false;
      }
-	printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
+	//printf("************** %s, line = %d\n", __FUNCTION__, __LINE__);
     return true;
 }
 void Camera::uninit_device(void) {

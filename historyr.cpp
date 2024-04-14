@@ -6,7 +6,9 @@ historyr::historyr(QWidget *parent) :
     ui(new Ui::historyr)
 {
     ui->setupUi(this);
-    connect(ui->BackButton,SIGNAL(clicked()),this,fun_close());
+    width = 480;
+	height = 272;
+    connect(ui->BackButton,SIGNAL(clicked()),this,SLOT(fun_close()));
 
 }
 void historyr::fun_close(){

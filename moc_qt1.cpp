@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qt1.h'
 **
-** Created: Sun Apr 14 14:20:22 2024
+** Created: Sun Apr 14 22:15:19 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Qt1[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,6 +39,8 @@ static const uint qt_meta_data_Qt1[] = {
       77,    4,    4,    4, 0x0a,
       94,    4,    4,    4, 0x0a,
      113,    4,    4,    4, 0x0a,
+     128,    4,    4,    4, 0x0a,
+     148,    4,    4,    4, 0x0a,
 
        0        // eod
 };
@@ -47,7 +49,8 @@ static const char qt_meta_stringdata_Qt1[] = {
     "Qt1\0\0fun_time()\0fun_open()\0fun_cap_open()\0"
     "fun_take_photo()\0fun_refresh_pic()\0"
     "updateResistor()\0fun_showResistor()\0"
-    "fun_change_t()\0"
+    "fun_change_t()\0fun_open_resistor()\0"
+    "display_pic()\0"
 };
 
 const QMetaObject Qt1::staticMetaObject = {
@@ -89,9 +92,11 @@ int Qt1::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 5: updateResistor(); break;
         case 6: fun_showResistor(); break;
         case 7: fun_change_t(); break;
+        case 8: fun_open_resistor(); break;
+        case 9: display_pic(); break;
         default: ;
         }
-        _id -= 8;
+        _id -= 10;
     }
     return _id;
 }

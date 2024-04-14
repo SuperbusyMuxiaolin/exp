@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'qt1.ui'
 **
-** Created: Sun Apr 14 13:49:56 2024
+** Created: Sun Apr 14 20:34:34 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -57,7 +57,7 @@ public:
         lb_time->setGeometry(QRect(140, 220, 191, 20));
         lb_pic = new QLabel(Qt1);
         lb_pic->setObjectName(QString::fromUtf8("lb_pic"));
-        lb_pic->setGeometry(QRect(200, 10, 241, 131));
+        lb_pic->setGeometry(QRect(210, 10, 241, 131));
         pic_listButton = new QPushButton(Qt1);
         pic_listButton->setObjectName(QString::fromUtf8("pic_listButton"));
         pic_listButton->setGeometry(QRect(10, 70, 141, 34));
@@ -66,7 +66,7 @@ public:
         ResistorButton->setGeometry(QRect(11, 130, 141, 34));
         layoutWidget = new QWidget(Qt1);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 199, 36));
+        layoutWidget->setGeometry(QRect(10, 10, 141, 31));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -82,7 +82,7 @@ public:
 
         layoutWidget1 = new QWidget(Qt1);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(200, 160, 241, 55));
+        layoutWidget1->setGeometry(QRect(210, 160, 241, 55));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -118,10 +118,15 @@ public:
 
         warnButton1 = new QPushButton(Qt1);
         warnButton1->setObjectName(QString::fromUtf8("warnButton1"));
-        warnButton1->setGeometry(QRect(450, 70, 31, 31));
+        warnButton1->setGeometry(QRect(460, 70, 16, 16));
+        warnButton1->setStyleSheet(QString::fromUtf8("QpushButton{\n"
+"border-radius:15px;\n"
+"\n"
+"\n"
+"}"));
         warnButton2 = new QPushButton(Qt1);
         warnButton2->setObjectName(QString::fromUtf8("warnButton2"));
-        warnButton2->setGeometry(QRect(450, 170, 31, 31));
+        warnButton2->setGeometry(QRect(460, 180, 16, 16));
 
         retranslateUi(Qt1);
 
@@ -140,7 +145,7 @@ public:
 #endif // QT_NO_WHATSTHIS
         OpenButton->setText(QApplication::translate("Qt1", "Start", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Qt1", "Resistance:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("Qt1", "Warning", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("Qt1", "Warning:", 0, QApplication::UnicodeUTF8));
         lb_resistor->setText(QString());
         lb_warning->setText(QString());
         warnButton1->setText(QString());

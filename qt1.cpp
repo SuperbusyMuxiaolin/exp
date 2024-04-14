@@ -25,7 +25,7 @@ static int i=0;
 int update_t_set=500;
 int camera=0;
 int W=0;
-int FLAG=1;
+//int FLAG=1;
 DLIST *p;
 DLIST *q;
 DLIST head;
@@ -40,8 +40,8 @@ void insert_dlinklist(DLIST *d,char *s);
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
-    isCapOpen = false;
-    isToSave = false;
+    //isCapOpen = false;
+    //isToSave = false;
     m_image = NULL;
     OpenButton->setDisabled(false);
 
@@ -75,11 +75,11 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
 	init_dlinklist(&head);
-        width = 480;
-        height = 272;
-        myCamera = new Camera("/dev/video0", width, height, 0);
-        frameBufRGB = new unsigned char[width * height * 3];
-        frameBufYUV = new unsigned char[width * height * 2];
+    width = 480;
+	height = 272;
+    myCamera = new Camera("/dev/video0", width, height, 0);
+    frameBufRGB = new unsigned char[width * height * 3];
+    frameBufYUV = new unsigned char[width * height * 2];
 }
 void Qt1::fun_open_resistor(){
     hr.setWindowTitle("Resistance Value History Record");
@@ -95,7 +95,7 @@ void Qt1::fun_refresh_pic()
     printf("refresh!!!!!!!!!!\n");
 	if (isTakingPhoto)
     {
-        refreshTimer->stop();
+        //refreshTimer->stop();
     }
    if(!myCamera->GetBuffer(frameBufYUV))
    {
@@ -124,7 +124,7 @@ void Qt1::fun_cap_open()
         OpenButton->setText("Close");
         myCamera->OpenDevice();
         printf("111111111111111111\n");
-        refreshTimer->start(1000);  
+        refreshTimer->start(100);  
         isTakingPhoto = false;
 		update_t.start(update_t_set);//相机处于打开状态，数据更新及获取开始，按update_t_set为间隔获取
     }
@@ -175,11 +175,12 @@ void Qt1::fun_showResistor(){
 	QString r = QString::number(resistor.getResistance());
 	lb_resistor->setText(r);
 	lb_warning->setText(resistor.getAlert());
-
-    if(1000<resistor.getResistance()<9000){
+	int resistance=resistor.getResistance();
+    if(resistance > 1000 && resistance < 9000){
         warnButton2->setStyleSheet("background-color: Green; color: white;");
     }
     else{
+		cout<<"阻值过小"<<endl;
         warnButton2->setStyleSheet("background-color: Red; color: white;");
     }
 
@@ -319,6 +320,15 @@ void insert_dlinklist(DLIST *d,char *s)	{
 void Qt1::updateResistor(){
 	resistor.update();
 	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
+}
+
+void Qt1::display_pic()
+{
+	QString buf(p->path);
+	QPixmap p(buf);
+	lb_pic->setPixmap(p);
+	lb_pic->setScaledContents(1);
+
 }
 
 
