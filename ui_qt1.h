@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'qt1.ui'
 **
-** Created: Sat Apr 13 19:48:44 2024
+** Created: Sun Apr 14 13:49:56 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,8 +14,9 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
 #include <QtGui/QDialog>
+#include <QtGui/QDoubleSpinBox>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
@@ -29,17 +30,22 @@ class Ui_Qt1
 public:
     QLabel *lb_time;
     QLabel *lb_pic;
-    QComboBox *comboBox;
+    QPushButton *pic_listButton;
+    QPushButton *ResistorButton;
+    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QDoubleSpinBox *tSpinBox;
     QPushButton *OpenButton;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
-    QLabel *lb_resistor;
-    QLabel *lb_warning;
-    QWidget *verticalLayoutWidget_2;
+    QWidget *layoutWidget1;
+    QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_3;
     QLabel *label_4;
-    QPushButton *pic_listButton;
+    QVBoxLayout *verticalLayout;
+    QLabel *lb_resistor;
+    QLabel *lb_warning;
+    QPushButton *warnButton1;
+    QPushButton *warnButton2;
 
     void setupUi(QDialog *Qt1)
     {
@@ -48,51 +54,74 @@ public:
         Qt1->resize(480, 272);
         lb_time = new QLabel(Qt1);
         lb_time->setObjectName(QString::fromUtf8("lb_time"));
-        lb_time->setGeometry(QRect(140, 250, 191, 20));
+        lb_time->setGeometry(QRect(140, 220, 191, 20));
         lb_pic = new QLabel(Qt1);
         lb_pic->setObjectName(QString::fromUtf8("lb_pic"));
-        lb_pic->setGeometry(QRect(230, 60, 241, 131));
-        comboBox = new QComboBox(Qt1);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(10, 10, 69, 22));
-        OpenButton = new QPushButton(Qt1);
+        lb_pic->setGeometry(QRect(200, 10, 241, 131));
+        pic_listButton = new QPushButton(Qt1);
+        pic_listButton->setObjectName(QString::fromUtf8("pic_listButton"));
+        pic_listButton->setGeometry(QRect(10, 70, 141, 34));
+        ResistorButton = new QPushButton(Qt1);
+        ResistorButton->setObjectName(QString::fromUtf8("ResistorButton"));
+        ResistorButton->setGeometry(QRect(11, 130, 141, 34));
+        layoutWidget = new QWidget(Qt1);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 199, 36));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        tSpinBox = new QDoubleSpinBox(layoutWidget);
+        tSpinBox->setObjectName(QString::fromUtf8("tSpinBox"));
+
+        horizontalLayout->addWidget(tSpinBox);
+
+        OpenButton = new QPushButton(layoutWidget);
         OpenButton->setObjectName(QString::fromUtf8("OpenButton"));
-        OpenButton->setGeometry(QRect(310, 10, 89, 24));
-        verticalLayoutWidget = new QWidget(Qt1);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(110, 60, 101, 51));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        lb_resistor = new QLabel(verticalLayoutWidget);
-        lb_resistor->setObjectName(QString::fromUtf8("lb_resistor"));
 
-        verticalLayout->addWidget(lb_resistor);
+        horizontalLayout->addWidget(OpenButton);
 
-        lb_warning = new QLabel(verticalLayoutWidget);
-        lb_warning->setObjectName(QString::fromUtf8("lb_warning"));
-
-        verticalLayout->addWidget(lb_warning);
-
-        verticalLayoutWidget_2 = new QWidget(Qt1);
-        verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(10, 60, 101, 51));
-        verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
+        layoutWidget1 = new QWidget(Qt1);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(200, 160, 241, 55));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(verticalLayoutWidget_2);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         verticalLayout_2->addWidget(label_3);
 
-        label_4 = new QLabel(verticalLayoutWidget_2);
+        label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout_2->addWidget(label_4);
 
-        pic_listButton = new QPushButton(Qt1);
-        pic_listButton->setObjectName(QString::fromUtf8("pic_listButton"));
-        pic_listButton->setGeometry(QRect(10, 140, 141, 34));
+
+        horizontalLayout_2->addLayout(verticalLayout_2);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        lb_resistor = new QLabel(layoutWidget1);
+        lb_resistor->setObjectName(QString::fromUtf8("lb_resistor"));
+
+        verticalLayout->addWidget(lb_resistor);
+
+        lb_warning = new QLabel(layoutWidget1);
+        lb_warning->setObjectName(QString::fromUtf8("lb_warning"));
+
+        verticalLayout->addWidget(lb_warning);
+
+
+        horizontalLayout_2->addLayout(verticalLayout);
+
+        warnButton1 = new QPushButton(Qt1);
+        warnButton1->setObjectName(QString::fromUtf8("warnButton1"));
+        warnButton1->setGeometry(QRect(450, 70, 31, 31));
+        warnButton2 = new QPushButton(Qt1);
+        warnButton2->setObjectName(QString::fromUtf8("warnButton2"));
+        warnButton2->setGeometry(QRect(450, 170, 31, 31));
 
         retranslateUi(Qt1);
 
@@ -102,14 +131,20 @@ public:
     void retranslateUi(QDialog *Qt1)
     {
         Qt1->setWindowTitle(QApplication::translate("Qt1", "Dialog", 0, QApplication::UnicodeUTF8));
-        lb_time->setText(QApplication::translate("Qt1", "t", 0, QApplication::UnicodeUTF8));
+        lb_time->setText(QString());
         lb_pic->setText(QString());
-        OpenButton->setText(QApplication::translate("Qt1", "Open cap", 0, QApplication::UnicodeUTF8));
-        lb_resistor->setText(QString());
-        lb_warning->setText(QString());
+        pic_listButton->setText(QApplication::translate("Qt1", "picture list", 0, QApplication::UnicodeUTF8));
+        ResistorButton->setText(QApplication::translate("Qt1", "History Resistance", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        tSpinBox->setWhatsThis(QApplication::translate("Qt1", "<html><head/><body><p><br/></p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        OpenButton->setText(QApplication::translate("Qt1", "Start", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Qt1", "Resistance:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("Qt1", "Warning", 0, QApplication::UnicodeUTF8));
-        pic_listButton->setText(QApplication::translate("Qt1", "picture list", 0, QApplication::UnicodeUTF8));
+        lb_resistor->setText(QString());
+        lb_warning->setText(QString());
+        warnButton1->setText(QString());
+        warnButton2->setText(QString());
     } // retranslateUi
 
 };
