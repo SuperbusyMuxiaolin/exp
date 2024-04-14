@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "ui_qt1.h"
 #include "Resistor.h"
+#include "historyr.h"
 //#include "dlinklist.h"
 
 class Qt1: public QDialog,public Ui_Qt1
@@ -18,7 +19,8 @@ class Qt1: public QDialog,public Ui_Qt1
 	Q_OBJECT
 public:
 	Qt1(QWidget *parent = 0);
-	~Qt1();
+    ~Qt1();
+    Resistor resistor;
 	void strip(char *s);
 	int judge(char *s);
         void showCapPhoto();
@@ -43,7 +45,8 @@ private:
         QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
 
-        Resistor resistor;
+        historyr hr;
+
         int len;
         bool isCapOpen;
         Camera* myCamera;

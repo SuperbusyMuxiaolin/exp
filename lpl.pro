@@ -8,7 +8,10 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += dlinklist.h qt1.h dlinklist.c
-FORMS += qt1.ui
+HEADERS += dlinklist.h qt1.h dlinklist.c \
+    historyr.h
+FORMS += qt1.ui \
+    historyr.ui
 SOURCES += dlinklist.c main.cpp qt1.cpp \
-    camera.cpp
+    camera.cpp \
+    historyr.cpp

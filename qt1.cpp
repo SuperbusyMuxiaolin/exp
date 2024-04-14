@@ -60,8 +60,8 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     tSpinBox->setWrapping(true);
     connect(tSpinBox,SIGNAL(valueChanged(double)),this,SLOT(fun_change_t()));
 
-
-
+    //打开历史阻值窗口
+    connect(ResistorButton,SIGNAL(clicked()),this,SLOT(fun_open_resistor()));
 
 	refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
@@ -82,6 +82,11 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
         frameBufRGB = new unsigned char[width * height * 3];
         frameBufYUV = new unsigned char[width * height * 2];
 }
+void Qt1::fun_open_resistor(){
+    hr.setWindowTitle("Resistance Value History Record");
+    hr.show();
+}
+
 void Qt1::fun_change_t(){
     update_t_set=1000*tSpinBox->value();
 }
@@ -108,7 +113,7 @@ void Qt1::fun_cap_open()
     if (camera == 1)
     {
         camera = 0;
-        OpenButton->setText("Open");
+        OpenButton->setText("Start");
         myCamera->CloseDevice();
         printf("00000000000000\n");
         refreshTimer->stop();
