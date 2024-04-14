@@ -22,11 +22,10 @@
 using namespace std;
 
 static int i=0;
-static int update_t_set=1000;
+int update_t_set=500;
 int camera=0;
 int W=0;
 int FLAG=1;
-//DLIST* Qt1:: p=NULL;
 DLIST *p;
 DLIST *q;
 DLIST head;
@@ -47,14 +46,14 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     OpenButton->setDisabled(false);
 
     //报警信息按钮不可按
-    warnButton1->setDisable(true);
-    warnButton2->setDisable(true);
+    warnButton1->setDisabled(true);
+    warnButton2->setDisabled(true);
 
 
     //设置更新时间选择窗
-    tSpinBox->setRange(0.4,2);
+    tSpinBox->setRange(0.4,5);
     tSpinBox->setSingleStep(0.2);
-    tSpinBox->setValue(1);
+    tSpinBox->setValue(0.5);
     tSpinBox->setPrefix("Time:");
     tSpinBox->setSuffix("s");
     tSpinBox->setWrapping(true);
@@ -171,7 +170,8 @@ void Qt1::fun_showResistor(){
 	QString r = QString::number(resistor.getResistance());
 	lb_resistor->setText(r);
 	lb_warning->setText(resistor.getAlert());
-    if(1000<r<9000){
+
+    if(1000<resistor.getResistance()<9000){
         warnButton2->setStyleSheet("background-color: Green; color: white;");
     }
     else{

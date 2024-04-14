@@ -42,6 +42,8 @@ private:
         QTimer t2;      
         QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
+        
+        int update_t_set;
 
         Resistor resistor;
         int len;
