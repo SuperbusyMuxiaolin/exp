@@ -38,6 +38,12 @@ void insert_dlinklist(DLIST *d,char *s);
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
+    m_log = new LogWidget;
+    m_log->show();
+    // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
+    // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
+    connect(m_log,SIGNAL(login()),this,SLOT(show()));
+
     //固定窗口大小
     this->setMinimumSize(480,272);
     this->setMaximumSize(480,272);

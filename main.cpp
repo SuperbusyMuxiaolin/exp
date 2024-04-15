@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 
 	Qt1 MD;
     MD.setWindowTitle("Resistance Video Monitoring System");
-    MD.show();
+    //MD.show();
     cout<<"main"<<MD.resistor.getResistance()<<endl;
 	// MD.setDefaultWeight();
 	return app.exec();

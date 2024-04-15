@@ -12,6 +12,7 @@
 #include "ui_qt1.h"
 #include "Resistor.h"
 #include "historyr.h"
+#include "logwidget.h"
 //#include "dlinklist.h"
 
 class Qt1: public QDialog,public Ui_Qt1
@@ -50,9 +51,8 @@ private:
         QTimer update_t;        //用于更新电阻及其报警信息
         
         int update_t_set;
-
         historyr hr;
-
+        LogWidget m_log;
         int len;
         bool isCapOpen;
         Camera* myCamera;
