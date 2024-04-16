@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'logwidget.ui'
 **
-** Created: Mon Apr 15 23:34:21 2024
+** Created: Tue Apr 16 18:27:44 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -42,15 +42,15 @@ public:
     QPushButton *pb_8;
     QPushButton *pb_0;
     QPushButton *pb_5;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QLineEdit *tx_pw;
-    QWidget *widget1;
+    QLineEdit *tx_usr;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
-    QLineEdit *tx_usr;
-    QWidget *widget2;
+    QLineEdit *tx_pw;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pb_log;
     QPushButton *pb_cancel;
@@ -62,7 +62,7 @@ public:
         LogWidget->resize(480, 230);
         gridLayoutWidget = new QWidget(LogWidget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(260, 20, 201, 181));
+        gridLayoutWidget->setGeometry(QRect(270, 20, 191, 181));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -126,50 +126,50 @@ public:
 
         gridLayout->addWidget(pb_5, 1, 1, 1, 1);
 
-        widget = new QWidget(LogWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(11, 20, 231, 27));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(LogWidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(11, 20, 231, 27));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout->addWidget(label);
 
-        tx_pw = new QLineEdit(widget);
-        tx_pw->setObjectName(QString::fromUtf8("tx_pw"));
+        tx_usr = new QLineEdit(layoutWidget);
+        tx_usr->setObjectName(QString::fromUtf8("tx_usr"));
 
-        horizontalLayout->addWidget(tx_pw);
+        horizontalLayout->addWidget(tx_usr);
 
-        widget1 = new QWidget(LogWidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 90, 231, 27));
-        horizontalLayout_2 = new QHBoxLayout(widget1);
+        layoutWidget1 = new QWidget(LogWidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 90, 231, 27));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(widget1);
+        label_2 = new QLabel(layoutWidget1);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
-        tx_usr = new QLineEdit(widget1);
-        tx_usr->setObjectName(QString::fromUtf8("tx_usr"));
+        tx_pw = new QLineEdit(layoutWidget1);
+        tx_pw->setObjectName(QString::fromUtf8("tx_pw"));
 
-        horizontalLayout_2->addWidget(tx_usr);
+        horizontalLayout_2->addWidget(tx_pw);
 
-        widget2 = new QWidget(LogWidget);
-        widget2->setObjectName(QString::fromUtf8("widget2"));
-        widget2->setGeometry(QRect(10, 160, 235, 36));
-        horizontalLayout_3 = new QHBoxLayout(widget2);
+        layoutWidget2 = new QWidget(LogWidget);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(10, 160, 235, 36));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        pb_log = new QPushButton(widget2);
+        pb_log = new QPushButton(layoutWidget2);
         pb_log->setObjectName(QString::fromUtf8("pb_log"));
 
         horizontalLayout_3->addWidget(pb_log);
 
-        pb_cancel = new QPushButton(widget2);
+        pb_cancel = new QPushButton(layoutWidget2);
         pb_cancel->setObjectName(QString::fromUtf8("pb_cancel"));
 
         horizontalLayout_3->addWidget(pb_cancel);
