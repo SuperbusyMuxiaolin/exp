@@ -10,6 +10,8 @@
 #include "Keyboard.h"
 #include "NumberKeyboard.h"
 
+using namespace AeaQt;
+
 
 namespace Ui {
 class LogWidget;
