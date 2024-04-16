@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'logwidget.h'
 **
-** Created: Tue Apr 16 18:35:59 2024
+** Created: Tue Apr 16 20:49:46 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_LogWidget[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_LogWidget[] = {
  // slots: signature, parameters, type, tag, flags
       34,   10,   10,   10, 0x0a,
       53,   10,   10,   10, 0x0a,
+      70,   10,   10,   10, 0x0a,
 
        0        // eod
 };
@@ -44,6 +45,7 @@ static const uint qt_meta_data_LogWidget[] = {
 static const char qt_meta_stringdata_LogWidget[] = {
     "LogWidget\0\0login()\0close_window()\0"
     "pb_clear_clicked()\0pb_log_clicked()\0"
+    "pb_0_clicked()\0"
 };
 
 const QMetaObject LogWidget::staticMetaObject = {
@@ -79,9 +81,10 @@ int LogWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: close_window(); break;
         case 2: pb_clear_clicked(); break;
         case 3: pb_log_clicked(); break;
+        case 4: pb_0_clicked(); break;
         default: ;
         }
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
