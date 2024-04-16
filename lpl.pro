@@ -14,8 +14,7 @@ HEADERS += dlinklist.h qt1.h dlinklist.c \
     Resistor.h \
     AbstractKeyboard.h \
     Keyboard.h \
-    KeyButton.h \
-    NumberKeyboard.h
+    KeyButton.h
 FORMS += qt1.ui \
     historyr.ui \
     logwidget.ui
