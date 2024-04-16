@@ -13,6 +13,17 @@ LogWidget::LogWidget(QWidget *parent) :
 
 
     ui->pb_0->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_1->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_2->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_3->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_4->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_5->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_6->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_7->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_8->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_9->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_bk->setFocusPolicy(Qt::NoFocus); 
+
 
     // connect
     // 触发重置按钮的信号槽连接
@@ -35,7 +46,7 @@ LogWidget::LogWidget(QWidget *parent) :
     //连接退格键
     connect(ui->pb_bk,SIGNAL(clicked()),this,SLOT(pb_bk_clicked()));
     //连接退格键
-    connect(ui->pb_cancel,SIGNAL(clicked()),this,SLOT(pb_cancel_clicked());
+    connect(ui->pb_cancel,SIGNAL(clicked()),this,SLOT(pb_cancel_clicked()));
 
 
 
@@ -86,9 +97,6 @@ void LogWidget::pb_0_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-        
 }
 
 void LogWidget::pb_1_clicked(){
@@ -105,8 +113,7 @@ void LogWidget::pb_1_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
+    
 
 }
 
@@ -124,8 +131,7 @@ void LogWidget::pb_2_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return；
+   
 
 }
 
@@ -143,9 +149,7 @@ void LogWidget::pb_3_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+   
 }
 
 void LogWidget::pb_4_clicked(){
@@ -162,9 +166,7 @@ void LogWidget::pb_4_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+    
 }
 
 void LogWidget::pb_5_clicked(){
@@ -181,9 +183,7 @@ void LogWidget::pb_5_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+   
 }
 
 void LogWidget::pb_6_clicked(){
@@ -200,9 +200,7 @@ void LogWidget::pb_6_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+   
 }
 
 void LogWidget::pb_7_clicked(){
@@ -219,8 +217,7 @@ void LogWidget::pb_7_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
+  
 
 }
 
@@ -238,9 +235,7 @@ void LogWidget::pb_8_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+  
 }
 
 void LogWidget::pb_9_clicked(){
@@ -257,9 +252,7 @@ void LogWidget::pb_9_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
+   
 }
 
 void LogWidget::pb_bk_clicked(){
@@ -276,10 +269,7 @@ void LogWidget::pb_bk_clicked(){
         qDebug() << str;
         ui->tx_pw->setText(str);//赋值给输入框
     }
-    else
-        return;
-
-
+   
 
 }
 
