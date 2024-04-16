@@ -30,6 +30,8 @@ public slots:
 
 private:
     Ui::LogWidget *ui;
+    QString m_username;
+    QString m_password;
 };
 
 #endif // LOGWIDGET_H

@@ -52,7 +52,7 @@ private:
         
         int update_t_set;
         historyr hr;
-        LogWidget m_log;
+        LogWidget *m_log;
         int len;
         bool isCapOpen;
         Camera* myCamera;

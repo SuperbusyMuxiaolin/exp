@@ -14,7 +14,7 @@ LogWidget::LogWidget(QWidget *parent) :
     // 发出信号后关闭登录窗口的信号槽连接
     connect(this,SIGNAL(close_window()),this,SLOT(close()));
 
-    ui->edit_pw->setEchoMode(QLineEdit::Password);//输入的时候就显示圆点
+    ui->tx_pw->setEchoMode(QLineEdit::Password);//输入的时候就显示圆点
 
     m_username = "123456";
     m_password = "123456";
@@ -23,15 +23,15 @@ LogWidget::LogWidget(QWidget *parent) :
 }
 void LogWidget::pb_clear_clicked()
 {
-    ui->edit_pw->clear();
-    ui->edit_name->clear();
+    ui->tx_pw->clear();
+    ui->tx_usr->clear();
 }
 
 
-void LogWidget::btn_log_clicked()
+void LogWidget::pb_log_clicked()
 {
-    QString name = ui->edit_name->text();
-    QString password = ui->edit_pw->text();
+    QString name = ui->tx_usr->text();
+    QString password = ui->tx_pw->text();
 
 
     if (name == m_username && password == m_password)

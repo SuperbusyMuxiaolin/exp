@@ -222,7 +222,7 @@ border-radius:15px;
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <widget class="QPushButton" name="pb_previous">
+     <widget class="QPushButton" name="pb_prev">
       <property name="text">
        <string>Previous</string>
       </property>
