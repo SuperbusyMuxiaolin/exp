@@ -50,8 +50,6 @@ LogWidget::LogWidget(QWidget *parent) :
 
 
 
-    ui->tx_pw->setEchoMode(QLineEdit::Password);//输入的时候就显示圆点
-
     m_username = "123456";
     m_password = "123456";
 
