@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'logwidget.ui'
 **
-** Created: Tue Apr 16 22:27:25 2024
+** Created: Tue Apr 16 22:40:20 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -62,7 +62,7 @@ public:
         LogWidget->resize(480, 230);
         gridLayoutWidget = new QWidget(LogWidget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(270, 20, 191, 181));
+        gridLayoutWidget->setGeometry(QRect(260, 20, 211, 181));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -155,7 +155,7 @@ public:
 
         tx_pw = new QLineEdit(layoutWidget1);
         tx_pw->setObjectName(QString::fromUtf8("tx_pw"));
-        tx_pw->setEchoMode(QLineEdit::Password);
+        tx_pw->setEchoMode(QLineEdit::Normal);
 
         horizontalLayout_2->addWidget(tx_pw);
 
@@ -197,9 +197,9 @@ public:
         pb_0->setText(QApplication::translate("LogWidget", "0", 0, QApplication::UnicodeUTF8));
         pb_5->setText(QApplication::translate("LogWidget", "5", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("LogWidget", "UserName", 0, QApplication::UnicodeUTF8));
-        tx_usr->setText(QApplication::translate("LogWidget", "Please input your username", 0, QApplication::UnicodeUTF8));
+        tx_usr->setText(QString());
         label_2->setText(QApplication::translate("LogWidget", "PassWord", 0, QApplication::UnicodeUTF8));
-        tx_pw->setText(QApplication::translate("LogWidget", "Please input your password", 0, QApplication::UnicodeUTF8));
+        tx_pw->setText(QString());
         pb_log->setText(QApplication::translate("LogWidget", "Login", 0, QApplication::UnicodeUTF8));
         pb_cancel->setText(QApplication::translate("LogWidget", "Cancel", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
