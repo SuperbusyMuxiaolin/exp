@@ -10,11 +10,33 @@ INCLUDEPATH += .
 # Input
 HEADERS += dlinklist.h qt1.h dlinklist.c \
     historyr.h \
-    logwidget.h
+    logwidget.h \
+    Resistor.h \
+    Keyboard/AbstractKeyboard.h \
+    Keyboard/Keyboard.h \
+    Keyboard/KeyButton.h \
+    Keyboard/NumberKeyboard.h \
+    AbstractKeyboard.h \
+    Keyboard.h \
+    KeyButton.h \
+    NumberKeyboard.h
 FORMS += qt1.ui \
     historyr.ui \
     logwidget.ui
 SOURCES += dlinklist.c main.cpp qt1.cpp \
     camera.cpp \
     historyr.cpp \
-    logwidget.cpp
+    logwidget.cpp \
+    Keyboard/Keyboard.cpp \
+    Keyboard/KeyButton.cpp \
+    Keyboard/NumberKeyboard.cpp \
+    Keyboard.cpp \
+    KeyButton.cpp \
+    NumberKeyboard.cpp
+
+RESOURCES += \
+    Resources/ChineseLib.qrc \
+    Resources/ChinesePhraseLib.qrc \
+    Resources/Font.qrc \
+    Resources/GoogleChineseLib.qrc \
+    Resources/Image.qrc

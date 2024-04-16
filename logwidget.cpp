@@ -6,6 +6,14 @@ LogWidget::LogWidget(QWidget *parent) :
     ui(new Ui::LogWidget)
 {
     ui->setupUi(this);
+    ui->tx_usr->setParent(&keyboard);
+    ui->tx_pw->setParent(&keyboard);
+
+
+    v->addWidget(&keyboard, 3);
+    keyboard.show();
+    setLayout(v);
+
     // connect
     // 触发重置按钮的信号槽连接
     connect(ui->pb_clear,SIGNAL(clicked()),this,SLOT(pb_clear_clicked()));

@@ -216,6 +216,7 @@ void Qt1::fun_showResistor(){
 
 void Qt1::fun_open()//注意文件位置
 {
+    refreshTimer->stop();
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                  "/mnt/usb",
                                                  tr("Images (*.png *.xpm *.jpg)"));

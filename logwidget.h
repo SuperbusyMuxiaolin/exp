@@ -7,6 +7,9 @@
 #include <QFile>
 #include <QDebug>
 #include <QByteArray>
+#include "Keyboard.h"
+#include "NumberKeyboard.h"
+
 
 namespace Ui {
 class LogWidget;
@@ -32,6 +35,7 @@ private:
     Ui::LogWidget *ui;
     QString m_username;
     QString m_password;
+    Keyboard keyboard;
 };
 
 #endif // LOGWIDGET_H

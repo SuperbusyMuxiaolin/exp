@@ -16,9 +16,9 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>270</x>
      <y>20</y>
-     <width>201</width>
+     <width>191</width>
      <height>181</height>
     </rect>
    </property>
@@ -109,7 +109,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>11</x>
@@ -127,11 +127,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="tx_pw"/>
+     <widget class="QLineEdit" name="tx_usr"/>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -149,11 +149,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="tx_usr"/>
+     <widget class="QLineEdit" name="tx_pw"/>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
