@@ -10,7 +10,8 @@ INCLUDEPATH += .
 # Input
 HEADERS += dlinklist.h qt1.h dlinklist.c \
     historyr.h \
-    logwidget.h
+    logwidget.h \
+    Resistor.h
 FORMS += qt1.ui \
     historyr.ui \
     logwidget.ui

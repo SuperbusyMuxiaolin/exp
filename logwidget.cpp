@@ -13,6 +13,9 @@ LogWidget::LogWidget(QWidget *parent) :
     connect(ui->pb_log,SIGNAL(clicked()),this,SLOT(pb_log_clicked()));
     // 发出信号后关闭登录窗口的信号槽连接
     connect(this,SIGNAL(close_window()),this,SLOT(close()));
+    //连接数字键和对应事件
+    connect(ui->pb_0,SIGNAL(clicked(bool)),this,SLOT(pb_number_clicked()));
+
 
     ui->tx_pw->setEchoMode(QLineEdit::Password);//输入的时候就显示圆点
 
@@ -43,6 +46,15 @@ void LogWidget::pb_log_clicked()
         QMessageBox::information(this, "Warning","Username or Password is wrong !");
 }
 
+void LogWidget::pb_number_clicked(){
+    Qstring t=((QpushButton*)sender())->text();
+    QLineEdit* activeLineEdit = qApp->focusWidget()->findChild<QLineEdit*>();
+        if (activeLineEdit) {
+            // 将字符串插入到光标位置
+            activeLineEdit->insert(t);
+        }
+
+}
 
 
 
