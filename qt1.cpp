@@ -43,6 +43,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
     connect(m_log,SIGNAL(login()),this,SLOT(show()));
+    connect(m_log,SIGNAL(close_exe()),this,SLOT(close()));
 
     //固定窗口大小
     this->setMinimumSize(480,272);
