@@ -12,10 +12,6 @@ HEADERS += dlinklist.h qt1.h dlinklist.c \
     historyr.h \
     logwidget.h \
     Resistor.h \
-    Keyboard/AbstractKeyboard.h \
-    Keyboard/Keyboard.h \
-    Keyboard/KeyButton.h \
-    Keyboard/NumberKeyboard.h \
     AbstractKeyboard.h \
     Keyboard.h \
     KeyButton.h \
@@ -27,9 +23,6 @@ SOURCES += dlinklist.c main.cpp qt1.cpp \
     camera.cpp \
     historyr.cpp \
     logwidget.cpp \
-    Keyboard/Keyboard.cpp \
-    Keyboard/KeyButton.cpp \
-    Keyboard/NumberKeyboard.cpp \
     Keyboard.cpp \
     KeyButton.cpp \
     NumberKeyboard.cpp
