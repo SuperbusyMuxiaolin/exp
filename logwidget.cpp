@@ -90,7 +90,7 @@ void LogWidget::pb_0_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="0";
@@ -106,7 +106,7 @@ void LogWidget::pb_1_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="1";
@@ -124,7 +124,7 @@ void LogWidget::pb_2_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="2";
@@ -142,7 +142,7 @@ void LogWidget::pb_3_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="3";
@@ -159,7 +159,7 @@ void LogWidget::pb_4_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="4";
@@ -176,7 +176,7 @@ void LogWidget::pb_5_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="5";
@@ -193,7 +193,7 @@ void LogWidget::pb_6_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="6";
@@ -210,7 +210,7 @@ void LogWidget::pb_7_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="7";
@@ -228,7 +228,7 @@ void LogWidget::pb_8_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="8";
@@ -245,7 +245,7 @@ void LogWidget::pb_9_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str+="9";
@@ -262,7 +262,7 @@ void LogWidget::pb_bk_clicked(){
         qDebug() << str;
         ui->tx_usr->setText(str);//赋值给输入框
     }
-    else if(ui->tx_pw->hasFocus())
+    if(ui->tx_pw->hasFocus())
     {
         QString str=ui->tx_pw->text();
         str.chop(1);
