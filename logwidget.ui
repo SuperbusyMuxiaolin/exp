@@ -16,9 +16,9 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>260</x>
      <y>20</y>
-     <width>191</width>
+     <width>211</width>
      <height>181</height>
     </rect>
    </property>
@@ -129,7 +129,7 @@
     <item>
      <widget class="QLineEdit" name="tx_usr">
       <property name="text">
-       <string>Please input your username</string>
+       <string/>
       </property>
       <property name="clearButtonEnabled">
        <bool>false</bool>
@@ -158,10 +158,10 @@
     <item>
      <widget class="QLineEdit" name="tx_pw">
       <property name="text">
-       <string>Please input your password</string>
+       <string/>
       </property>
       <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
+       <enum>QLineEdit::Normal</enum>
       </property>
      </widget>
     </item>
