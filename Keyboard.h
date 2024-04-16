@@ -1,4 +1,11 @@
-﻿#ifndef AEA_KEYBOARD_H
+﻿/**********************************************************
+#Author: Qtjun
+#WeChat Official Accounts: qthub_com
+#QQ Group: 732271126
+#Email: 2088201923@qq.com
+**********************************************************/
+
+#ifndef AEA_KEYBOARD_H
 #define AEA_KEYBOARD_H
 
 #include "AbstractKeyboard.h"

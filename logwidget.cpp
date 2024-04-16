@@ -1,5 +1,6 @@
 #include "logwidget.h"
 #include "ui_logwidget.h"
+using namespace AeaQt;
 
 LogWidget::LogWidget(QWidget *parent) :
     QDialog(parent),
