@@ -73,7 +73,6 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 
     //打开历史阻值窗口
     connect(ResistorButton,SIGNAL(clicked()),this,SLOT(fun_open_resistor()));
-    connect(this, SIGNAL(rListUpdated(QList<int>)), hr, SLOT(historyr::updaterList(QList<int>)));
 
 	refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
@@ -348,13 +347,16 @@ void Qt1::update_show_Resistor(){
     int resistance=resistor.getResistance();
 
     //将阻值加入阻值列表，并保证组织列表size小于20
-    if(rList.size()<20)
+    if(hr.List.size()<20)
     {
-        rList.append(resistance);
+        cout<<"组织列表小于20"<<endl;
+        hr.List.append(resistance);
+        cout<<"阻值列表的值"<<hr.List.first()<<endl;
     }
     else{
-        rList.removeFirst();
-        rList.append(resistance);
+        cout<<"组织列表太大"<<endl;
+        hr.List.removeFirst();
+        hr.List.append(resistance);
     }
 
     if(resistance > 1000 && resistance < 9000){
@@ -364,7 +366,6 @@ void Qt1::update_show_Resistor(){
         cout<<"阻值过小"<<endl;
         warnButton2->setStyleSheet("background-color: Red; color: white;");
     }
-    emit rListUpdated(rList);
 
 }
 

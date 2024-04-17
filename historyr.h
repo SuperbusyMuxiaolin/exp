@@ -2,6 +2,8 @@
 #define HISTORYR_H
 
 #include <QDialog>
+#include <QTimer>
+#include <QPainter>;
 
 namespace Ui {
 class historyr;
@@ -12,15 +14,20 @@ class historyr : public QDialog
     Q_OBJECT
 
 public:
+    QList<int> List;
     explicit historyr(QWidget *parent = 0);
     ~historyr();
+signals:
+  
 public slots:
     void fun_close();
-    void updaterList(const QList<int> &resistorList);
+    void fun_draw();
 
 private:
     Ui::historyr *ui;
-    QList<int> list;
+    QTimer t1;
+
+    
 };
 
 #endif // HISTORYR_H

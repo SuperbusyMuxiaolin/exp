@@ -28,7 +28,6 @@ public:
 //	void insert_dlinklist(DLIST *d,char *s);
 
 signals:
-        void rListUpdated(rList);
 	
 public slots:
         void fun_time();
