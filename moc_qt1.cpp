@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qt1.h'
 **
-** Created: Wed Apr 17 21:58:17 2024
+** Created: Wed Apr 17 23:35:38 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,31 +23,36 @@ static const uint qt_meta_data_Qt1[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+       5,    4,    4,    4, 0x05,
+      20,   18,    4,    4, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-       5,    4,    4,    4, 0x0a,
-      16,    4,    4,    4, 0x0a,
-      27,    4,    4,    4, 0x0a,
-      42,    4,    4,    4, 0x0a,
-      59,    4,    4,    4, 0x0a,
-      77,    4,    4,    4, 0x0a,
-     100,    4,    4,    4, 0x0a,
-     115,    4,    4,    4, 0x0a,
-     135,    4,    4,    4, 0x0a,
-     149,    4,    4,    4, 0x0a,
-     160,    4,    4,    4, 0x0a,
+      36,    4,    4,    4, 0x0a,
+      47,    4,    4,    4, 0x0a,
+      58,    4,    4,    4, 0x0a,
+      73,    4,    4,    4, 0x0a,
+      90,    4,    4,    4, 0x0a,
+     108,    4,    4,    4, 0x0a,
+     131,    4,    4,    4, 0x0a,
+     146,    4,    4,    4, 0x0a,
+     166,    4,    4,    4, 0x0a,
+     180,    4,    4,    4, 0x0a,
+     191,    4,    4,    4, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Qt1[] = {
-    "Qt1\0\0fun_time()\0fun_open()\0fun_cap_open()\0"
+    "Qt1\0\0hr_clicked()\0r\0r_updated(int&)\0"
+    "fun_time()\0fun_open()\0fun_cap_open()\0"
     "fun_take_photo()\0fun_refresh_pic()\0"
     "update_show_Resistor()\0fun_change_t()\0"
     "fun_open_resistor()\0display_pic()\0"
@@ -85,21 +90,36 @@ int Qt1::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: fun_time(); break;
-        case 1: fun_open(); break;
-        case 2: fun_cap_open(); break;
-        case 3: fun_take_photo(); break;
-        case 4: fun_refresh_pic(); break;
-        case 5: update_show_Resistor(); break;
-        case 6: fun_change_t(); break;
-        case 7: fun_open_resistor(); break;
-        case 8: display_pic(); break;
-        case 9: fun_prev(); break;
-        case 10: fun_pic(); break;
+        case 0: hr_clicked(); break;
+        case 1: r_updated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: fun_time(); break;
+        case 3: fun_open(); break;
+        case 4: fun_cap_open(); break;
+        case 5: fun_take_photo(); break;
+        case 6: fun_refresh_pic(); break;
+        case 7: update_show_Resistor(); break;
+        case 8: fun_change_t(); break;
+        case 9: fun_open_resistor(); break;
+        case 10: display_pic(); break;
+        case 11: fun_prev(); break;
+        case 12: fun_pic(); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
+}
+
+// SIGNAL 0
+void Qt1::hr_clicked()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void Qt1::r_updated(int & _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE

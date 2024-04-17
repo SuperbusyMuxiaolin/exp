@@ -345,7 +345,7 @@ void Qt1::update_show_Resistor(){
     lb_resistor->setText(r);
     lb_warning->setText(resistor.getAlert());
     int resistance=resistor.getResistance();
-    emit r_updated(resistance);
+    emit(r_updated(resistance));
 
 //    if(list2.size()<20)
 //    {

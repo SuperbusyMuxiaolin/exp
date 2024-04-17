@@ -15,8 +15,8 @@ int main(int argc, char** argv)
     MD.setWindowTitle("Resistance Video Monitoring System");
     historyr hr;
     hr.setWindowTitle("Resistance Value History Record");
-    connect(&MD,SIGNAL(hr_clicked()),&hr,SLOT(show());
-    connect(&MD,SIGNAL(r_updated(int)),&hr,SLOT(fun_update_draw(int));
+    QObject::connect(&MD,SIGNAL(hr_clicked()),&hr,SLOT(show()));
+    QObject::connect(&MD,SIGNAL(r_updated(int &r)),&hr,SLOT(fun_update_draw(int &r)));
 
 
 	return app.exec();

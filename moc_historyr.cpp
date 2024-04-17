@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'historyr.h'
 **
-** Created: Wed Apr 17 21:58:18 2024
+** Created: Wed Apr 17 23:32:02 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -32,13 +32,13 @@ static const uint qt_meta_data_historyr[] = {
 
  // slots: signature, parameters, type, tag, flags
       10,    9,    9,    9, 0x0a,
-      22,    9,    9,    9, 0x0a,
+      24,   22,    9,    9, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_historyr[] = {
-    "historyr\0\0fun_close()\0fun_draw()\0"
+    "historyr\0\0fun_close()\0r\0fun_update_draw(int&)\0"
 };
 
 const QMetaObject historyr::staticMetaObject = {
@@ -71,7 +71,7 @@ int historyr::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: fun_close(); break;
-        case 1: fun_draw(); break;
+        case 1: fun_update_draw((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
         _id -= 2;

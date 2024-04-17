@@ -30,7 +30,7 @@ public:
 
 signals:
         void hr_clicked();
-        void r_updated(int &r);
+        void r_updated(int r);
 	
 public slots:
         void fun_time();
