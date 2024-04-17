@@ -27,7 +27,6 @@ int W=0;
 DLIST *p;
 DLIST *q;
 DLIST head;
-QList<int> list2;
 
 
 QTimer* refreshTimer; 
@@ -50,8 +49,8 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     connect(m_log,SIGNAL(close_exe()),this,SLOT(close()));
 
     //固定窗口大小
-    this->setMinimumSize(480,231);
-    this->setMaximumSize(480,231);
+    this->setMinimumSize(480,235);
+    this->setMaximumSize(480,235);
     m_image = NULL;
     OpenButton->setDisabled(false);
 
@@ -98,8 +97,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     frameBufYUV = new unsigned char[width * height * 2];
 }
 void Qt1::fun_open_resistor(){
-    hr.setWindowTitle("Resistance Value History Record");
-    hr.show();
+    emit hr_clicked();
 }
 
 void Qt1::fun_change_t(){
@@ -347,19 +345,23 @@ void Qt1::update_show_Resistor(){
     lb_resistor->setText(r);
     lb_warning->setText(resistor.getAlert());
     int resistance=resistor.getResistance();
-    if(list2.size()<20)
-    {
-        cout<<resistance;
-        cout<<"组值列表小于20"<<endl;
-        list2.append(resistance);
-    }
-    else{
-        cout<<"阻值列表太大"<<endl;
-        list2.removeFirst();
-        list2.append(resistance);
-    }
-    cout<<"list2的size"<<list2.size()<<endl;
-    hr.temp=resistance;
+    emit r_updated(resistance);
+
+//    if(list2.size()<20)
+//    {
+//        cout<<resistance;
+//        cout<<"组值列表小于20"<<endl;
+//        list2.append(resistance);
+//    }
+//    else{
+//        cout<<"阻值列表太大"<<endl;
+//        list2.removeFirst();
+//        list2.append(resistance);
+//    }
+//    cout<<"list2的size"<<list2.size()<<endl;
+//    hr.temp=resistance;
+
+
     if(resistance > 1000 && resistance < 9000){
         warnButton2->setStyleSheet("background-color: Green; color: white;");
     }

@@ -19,8 +19,8 @@ historyr::historyr(QWidget *parent) :
     ui(new Ui::historyr)
 {
     ui->setupUi(this);
-    this->setMinimumSize(480,230);
-    this->setMaximumSize(480,230);
+    this->setMinimumSize(480,235);
+    this->setMaximumSize(480,235);
     this->temp=0;
     int width=400;
     int hight=220;
@@ -30,7 +30,6 @@ historyr::historyr(QWidget *parent) :
 
     
     connect(ui->BackButton,SIGNAL(clicked()),this,SLOT(fun_close()));//只是隐藏窗口
-    connect(&t1,SIGNAL(timeout()),this,SLOT(fun_draw()));
     t1.start(1000);
     
 
@@ -39,8 +38,19 @@ historyr::historyr(QWidget *parent) :
 void historyr::fun_close(){
     this->hide();
 }
-void historyr::fun_draw(){
-    cout<<"列表的最后一个值"<<List.last()<<endl;
+void historyr::fun_update_draw(int &r){
+    cout<<"传入的阻值是："<<r<<endl;
+    int n=20;//n为数据个数
+    if(List.size()<n)
+    {
+        cout<<"阻值列表小于20"<<endl;
+        List.append(r);
+    }
+    else{
+        cout<<"阻值列表大于20"<<endl;
+        List.removeFirst();
+        List.append(r);
+    }
     cout<<"列表的size"<<List.size()<<endl;
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);//设置反锯齿模式，好看一点
@@ -58,23 +68,12 @@ void historyr::fun_draw(){
     painter.drawLine(pointx,pointy-height,pointx,pointy);//坐标轴y高度为height
 
 
-    //获得数据中最大值和最小值、平均数
-    int n=20;//n为数据个数
+
     int _ma=10000;//数组里的最大值
     int _mi=0;//数组里的最小值
 
     int a[n];//数据储存在数组a中，大小为n
-    if(List.size()<20)
-    {
-        cout<<temp;
-        cout<<"组值列表小于20"<<endl;
-        List.append(temp);
-    }
-    else{
-        cout<<"阻值列表太大"<<endl;
-        List.removeFirst();
-        List.append(temp);
-    }
+
 
     for(int i=0;i<n;i++){
         if(i<List.size())

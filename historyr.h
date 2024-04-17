@@ -24,7 +24,7 @@ signals:
   
 public slots:
     void fun_close();
-    void fun_draw();
+    void fun_update_draw(int &r);
 protected:
     void paintEvent(QPaintEvent *){
         QPainter painter(this);

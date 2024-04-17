@@ -57,8 +57,12 @@ LogWidget::LogWidget(QWidget *parent) :
 }
 void LogWidget::pb_clear_clicked()
 {
-    ui->tx_pw->clear();
-    ui->tx_usr->clear();
+    if(ui->tx_usr->hasFocus()){
+        ui->tx_usr->clear();
+    }
+    if(ui->tx_pw->hasFocus()){
+        ui->tx_pw->clear();
+    }
 }
 
 void LogWidget::pb_cancel_clicked(){

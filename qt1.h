@@ -22,14 +22,15 @@ class Qt1: public QDialog,public Ui_Qt1
 public:
 	Qt1(QWidget *parent = 0);
     ~Qt1();
-    	Resistor resistor;
-    	historyr hr;
+    Resistor resistor;
 	void strip(char *s);
 	int judge(char *s);
         void showCapPhoto();
 //	void insert_dlinklist(DLIST *d,char *s);
 
 signals:
+        void hr_clicked();
+        void r_updated(int &r);
 	
 public slots:
         void fun_time();
