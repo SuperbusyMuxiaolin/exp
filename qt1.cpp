@@ -27,6 +27,7 @@ int W=0;
 DLIST *p;
 DLIST *q;
 DLIST head;
+QList<int> list2;
 
 
 QTimer* refreshTimer; 
@@ -38,6 +39,7 @@ void insert_dlinklist(DLIST *d,char *s);
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
+    
     m_log = new LogWidget;
     m_log->setWindowTitle("Login");
     m_log->show();
@@ -345,25 +347,23 @@ void Qt1::update_show_Resistor(){
     lb_resistor->setText(r);
     lb_warning->setText(resistor.getAlert());
     int resistance=resistor.getResistance();
-
-    //将阻值加入阻值列表，并保证组织列表size小于20
-    if(hr.List.size()<20)
+    if(list2.size()<20)
     {
-        cout<<"组织列表小于20"<<endl;
-        hr.List.append(resistance);
-        cout<<"阻值列表的值"<<hr.List.first()<<endl;
+        cout<<resistance;
+        cout<<"组值列表小于20"<<endl;
+        list2.append(resistance);
     }
     else{
-        cout<<"组织列表太大"<<endl;
-        hr.List.removeFirst();
-        hr.List.append(resistance);
+        cout<<"阻值列表太大"<<endl;
+        list2.removeFirst();
+        list2.append(resistance);
     }
-
+    cout<<"list2的size"<<list2.size()<<endl;
+    hr.temp=resistance;
     if(resistance > 1000 && resistance < 9000){
         warnButton2->setStyleSheet("background-color: Green; color: white;");
     }
     else{
-        cout<<"阻值过小"<<endl;
         warnButton2->setStyleSheet("background-color: Red; color: white;");
     }
 

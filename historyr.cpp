@@ -10,9 +10,9 @@
 #include <algorithm> // 用于使用 std::min_element 和 std::max_element
 #include<cstdlib>
 #include<ctime>
-#define inf 0x3f3f3f3f
 
 using namespace std;
+QList<int> List;
 
 historyr::historyr(QWidget *parent) :
     QDialog(parent),
@@ -21,9 +21,9 @@ historyr::historyr(QWidget *parent) :
     ui->setupUi(this);
     this->setMinimumSize(480,230);
     this->setMaximumSize(480,230);
+    this->temp=0;
     int width=400;
     int hight=220;
-    ui->setupUi(this);
     image = QImage(width,hight,QImage::Format_RGB32);  //画布的初始化大小设为400*220，使用32位颜色
     image.fill(qRgb(255,255,255));//对画布进行填充
 
@@ -41,6 +41,7 @@ void historyr::fun_close(){
 }
 void historyr::fun_draw(){
     cout<<"列表的最后一个值"<<List.last()<<endl;
+    cout<<"列表的size"<<List.size()<<endl;
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);//设置反锯齿模式，好看一点
     int width1=400;
@@ -63,12 +64,24 @@ void historyr::fun_draw(){
     int _mi=0;//数组里的最小值
 
     int a[n];//数据储存在数组a中，大小为n
+    if(List.size()<20)
+    {
+        cout<<temp;
+        cout<<"组值列表小于20"<<endl;
+        List.append(temp);
+    }
+    else{
+        cout<<"阻值列表太大"<<endl;
+        List.removeFirst();
+        List.append(temp);
+    }
 
     for(int i=0;i<n;i++){
         if(i<List.size())
             a[i]=List.takeAt(i);
         else
             a[i]=0;
+        cout<<a[i]<<endl;
     }
     double kx=(double)width/(n-1); //x轴的系数
     double ky=(double)height/_ma;//y方向的比例系数
@@ -142,5 +155,6 @@ void historyr::fun_draw(){
 
 historyr::~historyr()
 {
+    cout<<"hr deleted"<<endl;
     delete ui;
 }

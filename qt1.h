@@ -13,6 +13,7 @@
 #include "Resistor.h"
 #include "historyr.h"
 #include "logwidget.h"
+#include <QList>
 //#include "dlinklist.h"
 
 class Qt1: public QDialog,public Ui_Qt1
@@ -21,7 +22,8 @@ class Qt1: public QDialog,public Ui_Qt1
 public:
 	Qt1(QWidget *parent = 0);
     ~Qt1();
-    Resistor resistor;
+    	Resistor resistor;
+    	historyr hr;
 	void strip(char *s);
 	int judge(char *s);
         void showCapPhoto();
@@ -48,10 +50,7 @@ private:
         QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
 
-        QList<int> rList;  // 存储阻值的列表
-        
         int update_t_set;
-        historyr hr;
         LogWidget *m_log;
         int len;
         bool isCapOpen;

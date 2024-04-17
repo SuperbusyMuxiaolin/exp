@@ -50,8 +50,8 @@ LogWidget::LogWidget(QWidget *parent) :
 
 
 
-    m_username = "123456";
-    m_password = "123456";
+    m_username = "1";
+    m_password = "1";
 
 
 }

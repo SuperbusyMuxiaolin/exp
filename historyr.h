@@ -16,7 +16,7 @@ class historyr : public QDialog
     Q_OBJECT
 
 public:
-    QList<int> List;
+    int temp;
     explicit historyr(QWidget *parent = 0);
     ~historyr();
 signals:
