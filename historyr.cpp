@@ -21,9 +21,12 @@ historyr::historyr(QWidget *parent) :
     ui->setupUi(this);
     this->setMinimumSize(480,230);
     this->setMaximumSize(480,230);
-    image = QImage(400,220,QImage::Format_RGB32);  //画布的初始化大小设为600*500，使用32位颜色
-    QColor backColor = qRgb(255,255,255);    //画布初始化背景色使用白色
-    image.fill(backColor);//对画布进行填充
+    int width=400;
+    int hight=220;
+    ui->setupUi(this);
+    image = QImage(width,hight,QImage::Format_RGB32);  //画布的初始化大小设为400*220，使用32位颜色
+    image.fill(qRgb(255,255,255));//对画布进行填充
+
 
     
     connect(ui->BackButton,SIGNAL(clicked()),this,SLOT(fun_close()));//只是隐藏窗口
@@ -40,46 +43,33 @@ void historyr::fun_draw(){
     cout<<"列表的最后一个值"<<List.last()<<endl;
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);//设置反锯齿模式，好看一点
+    int width1=400;
+    int height1=230;
+    int pointx=35,pointy=210;//确定坐标轴起点坐标，这里定义(35,200)
 
 
-    int pointx=35,pointy=110;//确定坐标轴起点坐标，这里定义(35,280)
-    int width=580-pointx,height=260;//确定坐标轴宽度跟高度 上文定义画布为600X300，宽高依此而定。
 
-    //绘制坐标轴 坐标轴原点(35，280)
-    painter.drawRect(5,5,600-10,300-10);//外围的矩形，从(5,5)起，到(590,290)结束，周围留了5的间隙。
+    int width=width1-pointx,height=200;//确定坐标轴宽度跟高度 上文定义画布为600X300，宽高依此而定。
+    //绘制坐标轴 坐标轴原点(35，200)
+    painter.drawRect(5,5,width1-10,height1-10);//外围的矩形，从(5,5)起，到(宽高各减10)结束，周围留了5的间隙。
 
     painter.drawLine(pointx,pointy,width+pointx,pointy);//坐标轴x宽度为width
     painter.drawLine(pointx,pointy-height,pointx,pointy);//坐标轴y高度为height
 
 
-    srand(time(NULL));
-
     //获得数据中最大值和最小值、平均数
-    int n=30;//n为数据个数
-    double sum=0;
-    double ave=0;
-    int _ma=0;//数组里的最大值
-    int _mi=inf;
+    int n=20;//n为数据个数
+    int _ma=10000;//数组里的最大值
+    int _mi=0;//数组里的最小值
 
     int a[n];//数据储存在数组a中，大小为n
 
-    for(int i=0;i<n;i++)
-        a[i]=rand()%40+20;
-    int maxpos=0,minpos=0;
-    for(int i=0;i<n;i++)
-    {
-        sum+=a[i];
-        if(a[i]>_ma){
-            _ma=a[i];
-            maxpos=i;
-        }
-        if(a[i]<_mi){
-            _mi=a[i];
-            minpos=i;
-        }
+    for(int i=0;i<n;i++){
+        if(i<List.size())
+            a[i]=List.takeAt(i);
+        else
+            a[i]=0;
     }
-    ave=sum/n;//平均数
-
     double kx=(double)width/(n-1); //x轴的系数
     double ky=(double)height/_ma;//y方向的比例系数
     QPen pen,penPoint;
@@ -98,28 +88,28 @@ void historyr::fun_draw(){
     }
     painter.drawPoint(pointx+kx*(n-1),pointy-a[n-1]*ky);//绘制最后一个点
 
-    //绘制平均线
-    QPen penAve;
-    penAve.setColor(Qt::red);//选择红色
-    penAve.setWidth(2);
-    penAve.setStyle(Qt::DotLine);//线条类型为虚线
-    painter.setPen(penAve);
-    painter.drawLine(pointx,pointy-ave*ky,pointx+width,pointy-ave*ky);
+//    //绘制线的demo
+//    QPen penAve;
+//    penAve.setColor(Qt::red);//选择红色
+//    penAve.setWidth(2);
+//    penAve.setStyle(Qt::DotLine);//线条类型为虚线
+//    painter.setPen(penAve);
+//    //painter.drawLine(pointx,pointy-ave*ky,pointx+width,pointy-ave*ky);
 
-    //绘制最大值和最小值
-    QPen penMaxMin;
-    penMaxMin.setColor(Qt::darkGreen);//暗绿色
-    painter.setPen(penMaxMin);
-    painter.drawText(pointx+kx*maxpos-kx,pointy-a[maxpos]*ky-5,
-                     "最大值"+QString::number(_ma));
-    painter.drawText(pointx+kx*minpos-kx,pointy-a[minpos]*ky+15,
-                     "最小值"+QString::number(_mi));
+//    //绘制最大值和最小值
+//    QPen penMaxMin;
+//    penMaxMin.setColor(Qt::darkGreen);//暗绿色
+//    painter.setPen(penMaxMin);
+//    painter.drawText(pointx+kx*maxpos-kx,pointy-a[maxpos]*ky-5,
+//                     "最大值"+QString::number(_ma));
+//    painter.drawText(pointx+kx*minpos-kx,pointy-a[minpos]*ky+15,
+//                     "最小值"+QString::number(_mi));
 
-    penMaxMin.setColor(Qt::red);
-    penMaxMin.setWidth(7);
-    painter.setPen(penMaxMin);
-    painter.drawPoint(pointx+kx*maxpos,pointy-a[maxpos]*ky);//标记最大值点
-    painter.drawPoint(pointx+kx*minpos,pointy-a[minpos]*ky);//标记最小值点
+//    penMaxMin.setColor(Qt::red);
+//    penMaxMin.setWidth(7);
+//    painter.setPen(penMaxMin);
+//    painter.drawPoint(pointx+kx*maxpos,pointy-a[maxpos]*ky);//标记最大值点
+//    painter.drawPoint(pointx+kx*minpos,pointy-a[minpos]*ky);//标记最小值点
 
 
     //绘制刻度线
@@ -146,7 +136,6 @@ void historyr::fun_draw(){
         painter.drawText(pointx-20,pointy-(i+0.85)*height/10,
                          QString::number((int)(_maStep*(i+1))));
     }
-
 
     
 }
