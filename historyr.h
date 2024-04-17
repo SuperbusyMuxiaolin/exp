@@ -16,9 +16,11 @@ public:
     ~historyr();
 public slots:
     void fun_close();
+    void updaterList(const QList<int> &resistorList);
 
 private:
     Ui::historyr *ui;
+    QList<int> list;
 };
 
 #endif // HISTORYR_H

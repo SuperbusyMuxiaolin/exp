@@ -28,7 +28,7 @@ public:
 //	void insert_dlinklist(DLIST *d,char *s);
 
 signals:
-//	mysig();
+        void rListUpdated(rList);
 	
 public slots:
         void fun_time();
@@ -36,8 +36,7 @@ public slots:
         void fun_cap_open();
         void fun_take_photo();
         void fun_refresh_pic();
-        void updateResistor();
-        void fun_showResistor();
+        void update_show_Resistor();
         void fun_change_t();//改变更新时间
         void fun_open_resistor();
         void display_pic();
@@ -49,6 +48,8 @@ private:
         QTimer t2;      
         QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
+
+        QList<int> rList;  // 存储阻值的列表
         
         int update_t_set;
         historyr hr;

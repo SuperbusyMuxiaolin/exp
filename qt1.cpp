@@ -39,15 +39,17 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
     m_log = new LogWidget;
+    m_log->setWindowTitle("Login");
     m_log->show();
-    // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
+    // 这个信号槽的作用就是激活主窗口的，已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
     connect(m_log,SIGNAL(login()),this,SLOT(show()));
+    //连接关闭程序信号和close()函数
     connect(m_log,SIGNAL(close_exe()),this,SLOT(close()));
 
     //固定窗口大小
-    this->setMinimumSize(480,272);
-    this->setMaximumSize(480,272);
+    this->setMinimumSize(480,231);
+    this->setMaximumSize(480,231);
     m_image = NULL;
     OpenButton->setDisabled(false);
 
@@ -71,6 +73,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 
     //打开历史阻值窗口
     connect(ResistorButton,SIGNAL(clicked()),this,SLOT(fun_open_resistor()));
+    connect(this, SIGNAL(rListUpdated(QList<int>)), hr, SLOT(historyr::updaterList(QList<int>)));
 
 	refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(fun_refresh_pic()));//动态更新图片显示
@@ -85,8 +88,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	t1.start(1000);//时间显示每一秒触发一次，即以秒进行时间显示更新
 
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
+    connect(&update_t,SIGNAL(timeout()),this,SLOT(update_show_Resistor()));//调用adc更新阻值信息&窗口更新阻值及报警信息
 	init_dlinklist(&head);
     width = 480;
 	height = 272;
@@ -199,21 +201,6 @@ void Qt1::fun_time()
     lb_time->setText(d.toString("yyyy-MM-dd-ddd hh:mm:ss"));	
 }
 
-//显示阻值和报警信息
-void Qt1::fun_showResistor(){
-	QString r = QString::number(resistor.getResistance());
-	lb_resistor->setText(r);
-	lb_warning->setText(resistor.getAlert());
-	int resistance=resistor.getResistance();
-    if(resistance > 1000 && resistance < 9000){
-        warnButton2->setStyleSheet("background-color: Green; color: white;");
-    }
-    else{
-		cout<<"阻值过小"<<endl;
-        warnButton2->setStyleSheet("background-color: Red; color: white;");
-    }
-
-}
 
 void Qt1::fun_open()//注意文件位置
 {
@@ -352,9 +339,33 @@ void insert_dlinklist(DLIST *d,char *s)	{
 	}
 	printf("insert success\n");
 }
-void Qt1::updateResistor(){
+void Qt1::update_show_Resistor(){
 	resistor.update();
 	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
+    QString r = QString::number(resistor.getResistance());
+    lb_resistor->setText(r);
+    lb_warning->setText(resistor.getAlert());
+    int resistance=resistor.getResistance();
+
+    //将阻值加入阻值列表，并保证组织列表size小于20
+    if(rList.size()<20)
+    {
+        rList.append(resistance);
+    }
+    else{
+        rList.removeFirst();
+        rList.append(resistance);
+    }
+
+    if(resistance > 1000 && resistance < 9000){
+        warnButton2->setStyleSheet("background-color: Green; color: white;");
+    }
+    else{
+        cout<<"阻值过小"<<endl;
+        warnButton2->setStyleSheet("background-color: Red; color: white;");
+    }
+    emit rListUpdated(rList);
+
 }
 
 void Qt1::display_pic()
