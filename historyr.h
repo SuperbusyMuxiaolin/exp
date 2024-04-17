@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include <QTimer>
-#include <QPainter>;
+#include<QMouseEvent>
+#include<QPaintEvent>
+#include<QtGui>
 
 namespace Ui {
 class historyr;
@@ -18,14 +20,21 @@ public:
     explicit historyr(QWidget *parent = 0);
     ~historyr();
 signals:
+
   
 public slots:
     void fun_close();
     void fun_draw();
+protected:
+    void paintEvent(QPaintEvent *){
+        QPainter painter(this);
+        painter.drawImage(0,0,image);
+    }
 
 private:
     Ui::historyr *ui;
     QTimer t1;
+    QImage image;
 
     
 };

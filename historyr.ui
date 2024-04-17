@@ -16,14 +16,27 @@
   <widget class="QPushButton" name="BackButton">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>170</y>
+     <x>350</x>
+     <y>10</y>
      <width>112</width>
      <height>34</height>
     </rect>
    </property>
    <property name="text">
     <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="r_pic">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>291</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>r_pic</string>
    </property>
   </widget>
  </widget>
