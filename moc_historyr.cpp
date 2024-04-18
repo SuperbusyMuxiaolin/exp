@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'historyr.h'
 **
-** Created: Wed Apr 17 23:32:02 2024
+** Created: Thu Apr 18 08:05:08 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -38,7 +38,7 @@ static const uint qt_meta_data_historyr[] = {
 };
 
 static const char qt_meta_stringdata_historyr[] = {
-    "historyr\0\0fun_close()\0r\0fun_update_draw(int&)\0"
+    "historyr\0\0fun_close()\0r\0fun_update_draw(int)\0"
 };
 
 const QMetaObject historyr::staticMetaObject = {

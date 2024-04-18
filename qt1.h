@@ -29,8 +29,8 @@ public:
 //	void insert_dlinklist(DLIST *d,char *s);
 
 signals:
-        void hr_clicked();
-        void r_updated(int r);
+        	void hr_clicked();
+        	void r_updated(int r);
 	
 public slots:
         void fun_time();

@@ -24,7 +24,7 @@ signals:
   
 public slots:
     void fun_close();
-    void fun_update_draw(int &r);
+    void fun_update_draw(int r);
 protected:
     void paintEvent(QPaintEvent *){
         QPainter painter(this);
@@ -35,6 +35,7 @@ private:
     Ui::historyr *ui;
     QTimer t1;
     QImage image;
+    QList<int> rlist;
 
     
 };

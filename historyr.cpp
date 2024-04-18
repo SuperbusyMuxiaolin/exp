@@ -12,13 +12,13 @@
 #include<ctime>
 
 using namespace std;
-QList<int> List;
 
 historyr::historyr(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::historyr)
 {
     ui->setupUi(this);
+    
     this->setMinimumSize(480,235);
     this->setMaximumSize(480,235);
     this->temp=0;
@@ -38,20 +38,23 @@ historyr::historyr(QWidget *parent) :
 void historyr::fun_close(){
     this->hide();
 }
-void historyr::fun_update_draw(int &r){
+void historyr::fun_update_draw(int r){
     cout<<"传入的阻值是："<<r<<endl;
     int n=20;//n为数据个数
-    if(List.size()<n)
+    if(rlist.size()<n)
     {
         cout<<"阻值列表小于20"<<endl;
-        List.append(r);
+        rlist.append(r);
+        cout<<"末尾加入阻值"<<endl;
+        
     }
     else{
         cout<<"阻值列表大于20"<<endl;
-        List.removeFirst();
-        List.append(r);
+        rlist.removeFirst();
+        rlist.append(r);
+        cout<<"现移除，再加入阻值"<<endl;
     }
-    cout<<"列表的size"<<List.size()<<endl;
+    cout<<"列表的size"<<rlist.size()<<endl;
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);//设置反锯齿模式，好看一点
     int width1=400;
@@ -76,8 +79,8 @@ void historyr::fun_update_draw(int &r){
 
 
     for(int i=0;i<n;i++){
-        if(i<List.size())
-            a[i]=List.takeAt(i);
+        if(i<rlist.size())
+            a[i]=rlist.at(i);
         else
             a[i]=0;
         cout<<a[i]<<endl;

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qt1.h'
 **
-** Created: Wed Apr 17 23:35:38 2024
+** Created: Thu Apr 18 08:05:07 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -35,23 +35,23 @@ static const uint qt_meta_data_Qt1[] = {
       20,   18,    4,    4, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      36,    4,    4,    4, 0x0a,
-      47,    4,    4,    4, 0x0a,
-      58,    4,    4,    4, 0x0a,
-      73,    4,    4,    4, 0x0a,
-      90,    4,    4,    4, 0x0a,
-     108,    4,    4,    4, 0x0a,
-     131,    4,    4,    4, 0x0a,
-     146,    4,    4,    4, 0x0a,
-     166,    4,    4,    4, 0x0a,
-     180,    4,    4,    4, 0x0a,
-     191,    4,    4,    4, 0x0a,
+      35,    4,    4,    4, 0x0a,
+      46,    4,    4,    4, 0x0a,
+      57,    4,    4,    4, 0x0a,
+      72,    4,    4,    4, 0x0a,
+      89,    4,    4,    4, 0x0a,
+     107,    4,    4,    4, 0x0a,
+     130,    4,    4,    4, 0x0a,
+     145,    4,    4,    4, 0x0a,
+     165,    4,    4,    4, 0x0a,
+     179,    4,    4,    4, 0x0a,
+     190,    4,    4,    4, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Qt1[] = {
-    "Qt1\0\0hr_clicked()\0r\0r_updated(int&)\0"
+    "Qt1\0\0hr_clicked()\0r\0r_updated(int)\0"
     "fun_time()\0fun_open()\0fun_cap_open()\0"
     "fun_take_photo()\0fun_refresh_pic()\0"
     "update_show_Resistor()\0fun_change_t()\0"
@@ -117,7 +117,7 @@ void Qt1::hr_clicked()
 }
 
 // SIGNAL 1
-void Qt1::r_updated(int & _t1)
+void Qt1::r_updated(int _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
