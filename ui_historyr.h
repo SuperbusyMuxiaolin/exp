@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'historyr.ui'
 **
-** Created: Wed Apr 17 23:28:24 2024
+** Created: Thu Apr 18 20:20:51 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,7 +32,7 @@ public:
         historyr->resize(480, 235);
         BackButton = new QPushButton(historyr);
         BackButton->setObjectName(QString::fromUtf8("BackButton"));
-        BackButton->setGeometry(QRect(380, 10, 71, 34));
+        BackButton->setGeometry(QRect(410, 10, 60, 34));
 
         retranslateUi(historyr);
 

@@ -44,6 +44,7 @@ public slots:
         void display_pic();
         void fun_prev();
         void fun_pic();
+        void sendsignal();
 	
 private:
         QTimer t1;	//用于更新时间

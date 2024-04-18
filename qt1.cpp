@@ -21,7 +21,6 @@
 using namespace std;
 
 static int i=0;
-int update_t_set=500;
 int camera=0;
 int W=0;
 DLIST *p;
@@ -38,6 +37,7 @@ void insert_dlinklist(DLIST *d,char *s);
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
+	update_t_set=500;
     
     m_log = new LogWidget;
     m_log->setWindowTitle("Login");
@@ -89,6 +89,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
     connect(&update_t,SIGNAL(timeout()),this,SLOT(update_show_Resistor()));//调用adc更新阻值信息&窗口更新阻值及报警信息
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(sendsignal()));
 	init_dlinklist(&head);
     width = 480;
 	height = 272;
@@ -345,7 +346,6 @@ void Qt1::update_show_Resistor(){
     lb_resistor->setText(r);
     lb_warning->setText(resistor.getAlert());
     int resistance=resistor.getResistance();
-    emit(r_updated(resistance));
 
 //    if(list2.size()<20)
 //    {
@@ -370,6 +370,11 @@ void Qt1::update_show_Resistor(){
     }
 
 }
+void Qt1::sendsignal(){
+	int resistance=resistor.getResistance();
+	emit(r_updated(resistance));
+}
+
 
 void Qt1::display_pic()
 {
