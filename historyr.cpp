@@ -80,9 +80,9 @@ void historyr::fun_update_draw(int r){
 
     for(int i=0;i<n;i++){
         if(i<rlist.size())
-            a[i]=rlist.at(i);
+            a[n-1-i]=rlist.at(i);
         else
-            a[i]=0;
+            a[n-1-i]=0;
         cout<<a[i]<<endl;
     }
     double kx=(double)(width)/n; //x轴的系数
@@ -99,7 +99,7 @@ void historyr::fun_update_draw(int r){
         painter.setPen(pen);//黑色笔用于连线
         painter.drawLine(pointx+kx*i,pointy-a[i]*ky,pointx+kx*(i+1),pointy-a[i+1]*ky);
         painter.setPen(penPoint);//蓝色的笔，用于标记各个点
-        painter.drawPoint(pointx+kx*i,pointy-a[i]*ky);
+        painter.drawPoint(pointx+kx*(i),pointy-a[i]*ky);
     }
     painter.drawPoint(pointx+kx*(n-1),pointy-a[n-1]*ky);//绘制最后一个点
 
