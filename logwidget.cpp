@@ -22,7 +22,9 @@ LogWidget::LogWidget(QWidget *parent) :
     ui->pb_7->setFocusPolicy(Qt::NoFocus); 
     ui->pb_8->setFocusPolicy(Qt::NoFocus); 
     ui->pb_9->setFocusPolicy(Qt::NoFocus); 
-    ui->pb_bk->setFocusPolicy(Qt::NoFocus); 
+    ui->pb_bk->setFocusPolicy(Qt::NoFocus);
+    ui->pb_clear->setFocusPolicy(Qt::NoFocus);
+
 
 
     // connect
