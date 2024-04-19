@@ -24,11 +24,11 @@
 #include <signal.h>   //用于捕捉ctl+c信号的头文件
 
 
-int TCPconnect(int,char*);             //**建立TCP连接的全套过程函数(函数全部执行成功时返回0,否则返回-1)
+int TCPconnect(int,char*);                  //**建立TCP连接的全套过程函数(函数全部执行成功时返回0,否则返回-1)
 int TCPlogin(int,char*,char*);              //**客户端登录的函数
 int sendR(int,int);                         //**发送当前采集的ADC阻值
-int sendPhoto(int,char*);
-int sendHeartbeat();
+int sendPhoto(int,char*);                   //发送当前的图片
+int sendHeartBeat(int);                        //发送心跳包
 
 
 

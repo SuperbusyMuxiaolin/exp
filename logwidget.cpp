@@ -52,7 +52,7 @@ LogWidget::LogWidget(QWidget *parent) :
 
 
 
-    m_username = "1";
+    m_username = "1";//最后进行更改
     m_password = "1";
 
 

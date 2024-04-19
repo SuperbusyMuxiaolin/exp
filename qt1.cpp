@@ -19,7 +19,7 @@
 
 #include "dlinklist.c"	
 extern "C"{                  //表示用C语言编译（当C与C++混合编译时使用）
-#include "client.h"   //**引入TCP通信连接相关函数
+#include "client.h"   //**引入TCP客户端连接相关函数
 }
 using namespace std;
 
@@ -29,11 +29,22 @@ int W=0;
 DLIST *p;
 DLIST *q;
 DLIST head;
+char filename[20]="mnt/usb/a1.jpg";
 
 
 QTimer* refreshTimer; 
 bool isTakingPhoto; 
 
+
+//class Mythread:public QThread
+//{
+//    Q_OBJECT
+//public:
+//    void run()override
+//    {
+//        sendR()
+//    }
+//}
 
 void insert_dlinklist(DLIST *d,char *s);
 
@@ -41,14 +52,14 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
 	update_t_set=500;
-    cfd=TCPconnect(1234,"169.254.223.250");
+	//cfd=TCPconnect(1234,"169.254.223.6");
     
     m_log = new LogWidget;
     m_log->setWindowTitle("Login");
     m_log->show();
     // 这个信号槽的作用就是激活主窗口的，已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
-    connect(m_log,SIGNAL(login()),this,SLOT(show()));
+    connect(m_log,SIGNAL(login()),this,SLOT(login()));
     //连接关闭程序信号和close()函数
     connect(m_log,SIGNAL(close_exe()),this,SLOT(close()));
 
@@ -94,6 +105,8 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
     connect(&update_t,SIGNAL(timeout()),this,SLOT(update_show_Resistor()));//调用adc更新阻值信息&窗口更新阻值及报警信息
 	connect(&update_t,SIGNAL(timeout()),this,SLOT(sendsignal()));
+	connect(&t3,SIGNAL(timeout()),this,SLOT(sendmsg()));
+	connect(&t2,SIGNAL(timeout()),this,SLOT(sendHeart()));
 	init_dlinklist(&head);
     width = 480;
 	height = 272;
@@ -103,6 +116,17 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 }
 void Qt1::fun_open_resistor(){
     emit hr_clicked();
+}
+
+void Qt1::login(){
+    this->show();
+    cfd=TCPconnect(1234,"169.254.223.6");
+    cfdp=TCPconnect(11254,"169.254.223.6");
+    cfdh=TCPconnect(8108,"169.254.223.6");
+    t2.start(1000);
+}
+void Qt1::sendHeart(){
+    sendHeartBeat(cfdh);
 }
 
 void Qt1::fun_change_t(){
@@ -144,6 +168,7 @@ void Qt1::fun_prev()
 }
 void Qt1::fun_cap_open()
 {
+    //cfd=TCPconnect(1234,"169.254.223.6");
     if (camera == 1)
     {
         camera = 0;
@@ -162,6 +187,7 @@ void Qt1::fun_cap_open()
         refreshTimer->start(100);  
         isTakingPhoto = false;
 		update_t.start(update_t_set);//相机处于打开状态，数据更新及获取开始，按update_t_set为间隔获取
+		t3.start(update_t_set);
     }
 }
 
@@ -177,12 +203,14 @@ void Qt1::fun_clean_pixmap()
 void Qt1::fun_take_photo()
 {
     camera = 0;
-    char filename[20];
+    char filename1[20];
     if (m_image != NULL)
     {
-        sprintf(filename, "mnt/usb/a%d.jpg", W++);
-        printf("%s\n", filename);
-        m_image->save(filename, "jpg", -1);
+        sprintf(filename1, "mnt/usb/a%d.jpg", W++);
+        printf("%s\n", filename1);
+        m_image->save(filename1, "jpg", -1);
+        strcpy(filename, filename1);
+        //sendPhoto(cfdp,filename);
     }
     camera = 1;
     isTakingPhoto = true;
@@ -208,6 +236,7 @@ void Qt1::fun_time()
 
 void Qt1::fun_open()//注意文件位置
 {
+    //cfd=TCPconnect(1234,"169.254.223.6");
 	refreshTimer->stop();
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                  "/mnt/usb",
@@ -345,13 +374,15 @@ void insert_dlinklist(DLIST *d,char *s)	{
 }
 void Qt1::update_show_Resistor(){
 	resistor.update();
-	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
+	cout<<"阻值信息:"<<resistor.getAlert()<<"   "<<resistor.getResistance()<<endl;
     QString r = QString::number(resistor.getResistance());
     lb_resistor->setText(r);
     lb_warning->setText(resistor.getAlert());
-    int resistance=resistor.getResistance();
 
-    sendR(cfd,resistance);
+    int resistance=resistor.getResistance();
+    cout<<"send的阻值："<<resistance<<endl;
+    //sendR(cfd,resistance);
+
 
 
     if(resistance > 1000 && resistance < 9000){
@@ -376,6 +407,12 @@ void Qt1::display_pic()
 	lb_pic->setScaledContents(1);
     lb_num->setText(QString::number(i));
     lb_sum->setText(QString::number(len));
+
+}
+void Qt1::sendmsg(){
+
+    sendR(cfd,resistor.getResistance());
+    sendPhoto(cfdp,filename);
 
 }
 

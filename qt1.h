@@ -45,6 +45,9 @@ public slots:
         void fun_prev();
         void fun_pic();
         void sendsignal();
+        void login();
+        void sendmsg();
+        void sendHeart();
 	
 private:
         QTimer t1;	//用于更新时间
@@ -65,6 +68,8 @@ private:
         bool isToSave;
         void fun_clean_pixmap();
         int cfd;
+        int cfdp;
+        int cfdh;
 };
 
 

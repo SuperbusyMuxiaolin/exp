@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qt1.h'
 **
-** Created: Thu Apr 18 20:07:29 2024
+** Created: Sat Apr 20 00:17:13 2024
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Qt1[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -47,6 +47,9 @@ static const uint qt_meta_data_Qt1[] = {
      179,    4,    4,    4, 0x0a,
      190,    4,    4,    4, 0x0a,
      200,    4,    4,    4, 0x0a,
+     213,    4,    4,    4, 0x0a,
+     221,    4,    4,    4, 0x0a,
+     231,    4,    4,    4, 0x0a,
 
        0        // eod
 };
@@ -58,6 +61,7 @@ static const char qt_meta_stringdata_Qt1[] = {
     "update_show_Resistor()\0fun_change_t()\0"
     "fun_open_resistor()\0display_pic()\0"
     "fun_prev()\0fun_pic()\0sendsignal()\0"
+    "login()\0sendmsg()\0sendHeart()\0"
 };
 
 const QMetaObject Qt1::staticMetaObject = {
@@ -105,9 +109,12 @@ int Qt1::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 11: fun_prev(); break;
         case 12: fun_pic(); break;
         case 13: sendsignal(); break;
+        case 14: login(); break;
+        case 15: sendmsg(); break;
+        case 16: sendHeart(); break;
         default: ;
         }
-        _id -= 14;
+        _id -= 17;
     }
     return _id;
 }

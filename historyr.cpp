@@ -40,22 +40,22 @@ void historyr::fun_close(){
 }
 void historyr::fun_update_draw(int r){
     image.fill(qRgb(255,255,255));
-    cout<<"传入的阻值是："<<r<<endl;
+    //cout<<"传入的阻值是："<<r<<endl;
     int n=20;//n为数据个数
     if(rlist.size()<n)
     {
-        cout<<"阻值列表小于20"<<endl;
+        //cout<<"阻值列表小于20"<<endl;
         rlist.append(r);
-        cout<<"末尾加入阻值"<<endl;
+        //cout<<"末尾加入阻值"<<endl;
         
     }
     else{
-        cout<<"阻值列表大于20"<<endl;
+        //cout<<"阻值列表大于20"<<endl;
         rlist.removeFirst();
         rlist.append(r);
-        cout<<"现移除，再加入阻值"<<endl;
+        //cout<<"现移除，再加入阻值"<<endl;
     }
-    cout<<"列表的size"<<rlist.size()<<endl;
+    //cout<<"列表的size"<<rlist.size()<<endl;
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing, true);//设置反锯齿模式，好看一点
     int width1=400;
@@ -76,21 +76,19 @@ void historyr::fun_update_draw(int r){
     int _ma=10000;//数组里的最大值
 
     int a[n];//数据储存在数组a中，大小为n
-
-
     for(int i=0;i<n;i++){
         if(i<rlist.size())
             a[n-1-i]=rlist.at(i);
         else
             a[n-1-i]=0;
-        cout<<a[i]<<endl;
+        //cout<<a[i]<<endl;
     }
+
     double kx=(double)(width)/n; //x轴的系数
     double ky=(double)height/_ma;//y方向的比例系数
     QPen pen,penPoint;
     pen.setColor(Qt::black);
     pen.setWidth(2);
-
     penPoint.setColor(Qt::blue);
     penPoint.setWidth(5);
     for(int i=0;i<n-1;i++)
@@ -102,6 +100,7 @@ void historyr::fun_update_draw(int r){
         painter.drawPoint(pointx+kx*(i),pointy-a[i]*ky);
     }
     painter.drawPoint(pointx+kx*(n-1),pointy-a[n-1]*ky);//绘制最后一个点
+
 
     //绘制上限和下限
     QPen penlimit;
@@ -119,7 +118,7 @@ void historyr::fun_update_draw(int r){
     penDegree.setWidth(2);
     painter.setPen(penDegree);
     //画上x轴刻度线
-    for(int i=0;i<10;i++)//分成10份
+    for(int i=0;i<10;i++)//分成10份，每隔2绘制一个刻度
     {
         //选取合适的坐标，绘制一段长度为4的直线，用于表示刻度
         painter.drawLine(pointx+(i+1)*width/10,pointy,pointx+(i+1)*width/10,pointy+4);
@@ -127,17 +126,15 @@ void historyr::fun_update_draw(int r){
                          pointy+15,QString::number((int)((i)*((double)n/10))+1));
     }
     //y轴刻度线
-    double _maStep=(double)_ma/10;//y轴刻度间隔需根据最大值来表示
+    double _maStep=(double)_ma/10;//y轴刻度间隔需根据阻值区间来表示
     for(int i=0;i<10;i++)
     {
-        //代码较长，但是掌握基本原理即可。
-        //主要就是确定一个位置，然后画一条短短的直线表示刻度。
         painter.drawLine(pointx,pointy-(i+1)*height/10,
                          pointx-4,pointy-(i+1)*height/10);
         painter.drawText(pointx-30,pointy-(i+0.85)*height/10,
                          QString::number((int)(_maStep*(i+1))));
     }
-    update();
+    update();//实时更新绘图
 
     
 }
