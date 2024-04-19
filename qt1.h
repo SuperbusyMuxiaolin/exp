@@ -64,6 +64,7 @@ private:
         unsigned char *frameBufYUV;
         bool isToSave;
         void fun_clean_pixmap();
+        int cfd;
 };
 
 

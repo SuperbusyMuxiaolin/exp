@@ -18,6 +18,9 @@
 #include "qt1.h"
 
 #include "dlinklist.c"	
+extern "C"{                  //表示用C语言编译（当C与C++混合编译时使用）
+#include "client.h"   //**引入TCP通信连接相关函数
+}
 using namespace std;
 
 static int i=0;
@@ -38,6 +41,7 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
 	update_t_set=500;
+    cfd=TCPconnect(1234,"169.254.223.250");
     
     m_log = new LogWidget;
     m_log->setWindowTitle("Login");
@@ -347,19 +351,7 @@ void Qt1::update_show_Resistor(){
     lb_warning->setText(resistor.getAlert());
     int resistance=resistor.getResistance();
 
-//    if(list2.size()<20)
-//    {
-//        cout<<resistance;
-//        cout<<"组值列表小于20"<<endl;
-//        list2.append(resistance);
-//    }
-//    else{
-//        cout<<"阻值列表太大"<<endl;
-//        list2.removeFirst();
-//        list2.append(resistance);
-//    }
-//    cout<<"list2的size"<<list2.size()<<endl;
-//    hr.temp=resistance;
+    sendR(cfd,resistance);
 
 
     if(resistance > 1000 && resistance < 9000){

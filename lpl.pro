@@ -11,11 +11,13 @@ INCLUDEPATH += .
 HEADERS += dlinklist.h qt1.h dlinklist.c \
     historyr.h \
     logwidget.h \
-    Resistor.h
+    Resistor.h \
+    client.h
 FORMS += qt1.ui \
     historyr.ui \
     logwidget.ui
 SOURCES += dlinklist.c main.cpp qt1.cpp \
     camera.cpp \
     historyr.cpp \
-    logwidget.cpp
+    logwidget.cpp \
+    client.c
