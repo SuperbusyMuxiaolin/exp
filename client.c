@@ -44,9 +44,11 @@ int TCPlogin(int sock,char* usr,char* pwd){
 
 //发送电阻阻值
 int sendR(int sock,int r){
+    int cfd=sock;
     printf("%d\n",cfd);
     char info[22]; 
     char info2[22] = {}; 
+    char buff[1024] = {0};   
     int resistance =r;
     snprintf(info, sizeof(info), "%d", resistance);
     int wrcbyte;
