@@ -29,6 +29,8 @@ int TCPlogin(int,char*,char*);              //**客户端登录的函数
 int sendR(int,int);                         //**发送当前采集的ADC阻值
 int sendPhoto(int,char*);                   //发送当前的图片
 int sendHeartBeat(int);                        //发送心跳包
+int sendPhoto2(int ,char* ,int);
+int sendPhoto3(int,char*);
 
 
 

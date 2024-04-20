@@ -29,7 +29,7 @@ int W=0;
 DLIST *p;
 DLIST *q;
 DLIST head;
-char filename[20]="mnt/usb/a1.jpg";
+char filename[128]="mnt/usb/a1.jpg";
 
 
 QTimer* refreshTimer; 
@@ -121,7 +121,7 @@ void Qt1::fun_open_resistor(){
 void Qt1::login(){
     this->show();
     cfd=TCPconnect(1234,"169.254.223.6");
-    cfdp=TCPconnect(11254,"169.254.223.6");
+    //cfdp=TCPconnect(11254,"169.254.223.6");
     cfdh=TCPconnect(8108,"169.254.223.6");
     t2.start(1000);
 }
@@ -168,7 +168,6 @@ void Qt1::fun_prev()
 }
 void Qt1::fun_cap_open()
 {
-    //cfd=TCPconnect(1234,"169.254.223.6");
     if (camera == 1)
     {
         camera = 0;
@@ -210,7 +209,10 @@ void Qt1::fun_take_photo()
         printf("%s\n", filename1);
         m_image->save(filename1, "jpg", -1);
         strcpy(filename, filename1);
-        //sendPhoto(cfdp,filename);
+        printf("外面的字符串是%s\n", filename1);
+        cfdp=TCPconnect(11254,"169.254.223.6");
+        sendPhoto3(cfdp,filename1);
+
     }
     camera = 1;
     isTakingPhoto = true;
@@ -412,7 +414,7 @@ void Qt1::display_pic()
 void Qt1::sendmsg(){
 
     sendR(cfd,resistor.getResistance());
-    sendPhoto(cfdp,filename);
+    //sendPhoto2(cfdp,filename);
 
 }
 
