@@ -176,6 +176,7 @@ void Qt1::fun_cap_open()
         printf("00000000000000\n");
         refreshTimer->stop();
 		update_t.stop();//相机处于关闭状态，数据更新及获取停止
+		t3.stop();
     }
     else
     {
