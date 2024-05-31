@@ -54,13 +54,13 @@ public:
 
         if (resistance > THRESHOLD_HIGH) {
             setAlert("Too high!");
-            printf("high");
+            //printf("high");
         } else if (resistance < THRESHOLD_LOW) {
             setAlert("Too low!");
-            printf("low");
+            //printf("low");
         } else {
             setAlert("None");
-            printf("None");
+            //printf("None");
         }
     }
 

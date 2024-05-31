@@ -13,6 +13,7 @@
 #include "Resistor.h"
 #include "historyr.h"
 #include "logwidget.h"
+#include <QList>
 //#include "dlinklist.h"
 
 class Qt1: public QDialog,public Ui_Qt1
@@ -28,7 +29,8 @@ public:
 //	void insert_dlinklist(DLIST *d,char *s);
 
 signals:
-//	mysig();
+        	void hr_clicked();
+        	void r_updated(int r);
 	
 public slots:
         void fun_time();
@@ -36,22 +38,24 @@ public slots:
         void fun_cap_open();
         void fun_take_photo();
         void fun_refresh_pic();
-        void updateResistor();
-        void fun_showResistor();
+        void update_show_Resistor();
         void fun_change_t();//改变更新时间
         void fun_open_resistor();
         void display_pic();
         void fun_prev();
         void fun_pic();
+        void sendsignal();
+        void login();
+        void sendmsg();
+        void sendHeart();
 	
 private:
         QTimer t1;	//用于更新时间
         QTimer t2;      
         QTimer t3;      //用于自动播放图片
         QTimer update_t;        //用于更新电阻及其报警信息
-        
+
         int update_t_set;
-        historyr hr;
         LogWidget *m_log;
         int len;
         bool isCapOpen;
@@ -63,6 +67,9 @@ private:
         unsigned char *frameBufYUV;
         bool isToSave;
         void fun_clean_pixmap();
+        int cfd;
+        int cfdp;
+        int cfdh;
 };
 
 

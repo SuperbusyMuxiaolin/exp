@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'qt1.ui'
 **
-** Created: Mon Apr 15 23:34:21 2024
+** Created: Wed Apr 17 23:28:24 2024
 **      by: Qt User Interface Compiler version 4.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -58,7 +58,7 @@ public:
     {
         if (Qt1->objectName().isEmpty())
             Qt1->setObjectName(QString::fromUtf8("Qt1"));
-        Qt1->resize(480, 230);
+        Qt1->resize(480, 235);
         lb_time = new QLabel(Qt1);
         lb_time->setObjectName(QString::fromUtf8("lb_time"));
         lb_time->setGeometry(QRect(10, 220, 191, 20));
@@ -73,7 +73,7 @@ public:
         ResistorButton->setGeometry(QRect(10, 180, 151, 21));
         layoutWidget = new QWidget(Qt1);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 199, 41));
+        layoutWidget->setGeometry(QRect(10, 10, 171, 41));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -185,7 +185,7 @@ public:
         label->setText(QApplication::translate("Qt1", "/", 0, QApplication::UnicodeUTF8));
         lb_sum->setText(QString());
         lb_num->setText(QString());
-        pb_prev->setText(QApplication::translate("Qt1", "Previous", 0, QApplication::UnicodeUTF8));
+        pb_prev->setText(QApplication::translate("Qt1", "Prev", 0, QApplication::UnicodeUTF8));
         pb_next->setText(QApplication::translate("Qt1", "Next", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

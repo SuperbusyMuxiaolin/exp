@@ -18,35 +18,54 @@
 #include "qt1.h"
 
 #include "dlinklist.c"	
+extern "C"{                  //表示用C语言编译（当C与C++混合编译时使用）
+#include "client.h"   //**引入TCP客户端连接相关函数
+}
 using namespace std;
 
 static int i=0;
-int update_t_set=500;
 int camera=0;
 int W=0;
 DLIST *p;
 DLIST *q;
 DLIST head;
+char filename[128]="mnt/usb/a1.jpg";
 
 
 QTimer* refreshTimer; 
 bool isTakingPhoto; 
 
 
+//class Mythread:public QThread
+//{
+//    Q_OBJECT
+//public:
+//    void run()override
+//    {
+//        sendR()
+//    }
+//}
+
 void insert_dlinklist(DLIST *d,char *s);
 
 Qt1::Qt1(QWidget *parent):QDialog(parent)
 {
   	setupUi(this);
+	update_t_set=500;
+	//cfd=TCPconnect(1234,"169.254.223.6");
+    
     m_log = new LogWidget;
+    m_log->setWindowTitle("Login");
     m_log->show();
-    // 注意，这个信号槽的作用就是激活主窗口的，我们已经让主窗口不可以自动打开，
+    // 这个信号槽的作用就是激活主窗口的，已经让主窗口不可以自动打开，
     // 必须通过登录窗口中登录按钮发出的信号槽的信号才能打开
-    connect(m_log,SIGNAL(login()),this,SLOT(show()));
+    connect(m_log,SIGNAL(login()),this,SLOT(login()));
+    //连接关闭程序信号和close()函数
+    connect(m_log,SIGNAL(close_exe()),this,SLOT(close()));
 
     //固定窗口大小
-    this->setMinimumSize(480,272);
-    this->setMaximumSize(480,272);
+    this->setMinimumSize(480,235);
+    this->setMaximumSize(480,235);
     m_image = NULL;
     OpenButton->setDisabled(false);
 
@@ -84,8 +103,10 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
 	t1.start(1000);//时间显示每一秒触发一次，即以秒进行时间显示更新
 
   	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_take_photo()));
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(updateResistor()));//调用adc更新阻值信息
-	connect(&update_t,SIGNAL(timeout()),this,SLOT(fun_showResistor()));//窗口更新阻值及报警信息
+    connect(&update_t,SIGNAL(timeout()),this,SLOT(update_show_Resistor()));//调用adc更新阻值信息&窗口更新阻值及报警信息
+	connect(&update_t,SIGNAL(timeout()),this,SLOT(sendsignal()));
+	connect(&t3,SIGNAL(timeout()),this,SLOT(sendmsg()));
+	connect(&t2,SIGNAL(timeout()),this,SLOT(sendHeart()));
 	init_dlinklist(&head);
     width = 480;
 	height = 272;
@@ -94,8 +115,18 @@ Qt1::Qt1(QWidget *parent):QDialog(parent)
     frameBufYUV = new unsigned char[width * height * 2];
 }
 void Qt1::fun_open_resistor(){
-    hr.setWindowTitle("Resistance Value History Record");
-    hr.show();
+    emit hr_clicked();
+}
+
+void Qt1::login(){
+    this->show();
+    cfd=TCPconnect(1234,"169.254.223.6");
+    //cfdp=TCPconnect(11254,"169.254.223.6");
+    cfdh=TCPconnect(8108,"169.254.223.6");
+    t2.start(1000);
+}
+void Qt1::sendHeart(){
+    sendHeartBeat(cfdh);
 }
 
 void Qt1::fun_change_t(){
@@ -155,6 +186,7 @@ void Qt1::fun_cap_open()
         refreshTimer->start(100);  
         isTakingPhoto = false;
 		update_t.start(update_t_set);//相机处于打开状态，数据更新及获取开始，按update_t_set为间隔获取
+		t3.start(update_t_set);
     }
 }
 
@@ -170,12 +202,17 @@ void Qt1::fun_clean_pixmap()
 void Qt1::fun_take_photo()
 {
     camera = 0;
-    char filename[20];
+    char filename1[20];
     if (m_image != NULL)
     {
-        sprintf(filename, "mnt/usb/a%d.jpg", W++);
-        printf("%s\n", filename);
-        m_image->save(filename, "jpg", -1);
+        sprintf(filename1, "mnt/usb/a%d.jpg", W++);
+        printf("%s\n", filename1);
+        m_image->save(filename1, "jpg", -1);
+        strcpy(filename, filename1);
+        printf("外面的字符串是%s\n", filename1);
+        cfdp=TCPconnect(11254,"169.254.223.6");
+        sendPhoto3(cfdp,filename1);
+
     }
     camera = 1;
     isTakingPhoto = true;
@@ -198,25 +235,11 @@ void Qt1::fun_time()
     lb_time->setText(d.toString("yyyy-MM-dd-ddd hh:mm:ss"));	
 }
 
-//显示阻值和报警信息
-void Qt1::fun_showResistor(){
-	QString r = QString::number(resistor.getResistance());
-	lb_resistor->setText(r);
-	lb_warning->setText(resistor.getAlert());
-	int resistance=resistor.getResistance();
-    if(resistance > 1000 && resistance < 9000){
-        warnButton2->setStyleSheet("background-color: Green; color: white;");
-    }
-    else{
-		cout<<"阻值过小"<<endl;
-        warnButton2->setStyleSheet("background-color: Red; color: white;");
-    }
-
-}
 
 void Qt1::fun_open()//注意文件位置
 {
-    refreshTimer->stop();
+    //cfd=TCPconnect(1234,"169.254.223.6");
+	refreshTimer->stop();
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                  "/mnt/usb",
                                                  tr("Images (*.png *.xpm *.jpg)"));
@@ -351,10 +374,32 @@ void insert_dlinklist(DLIST *d,char *s)	{
 	}
 	printf("insert success\n");
 }
-void Qt1::updateResistor(){
+void Qt1::update_show_Resistor(){
 	resistor.update();
-	cout<<"阻值信息"<<resistor.getAlert()<<resistor.getResistance()<<endl;
+	cout<<"阻值信息:"<<resistor.getAlert()<<"   "<<resistor.getResistance()<<endl;
+    QString r = QString::number(resistor.getResistance());
+    lb_resistor->setText(r);
+    lb_warning->setText(resistor.getAlert());
+
+    int resistance=resistor.getResistance();
+    cout<<"send的阻值："<<resistance<<endl;
+    //sendR(cfd,resistance);
+
+
+
+    if(resistance > 1000 && resistance < 9000){
+        warnButton2->setStyleSheet("background-color: Green; color: white;");
+    }
+    else{
+        warnButton2->setStyleSheet("background-color: Red; color: white;");
+    }
+
 }
+void Qt1::sendsignal(){
+	int resistance=resistor.getResistance();
+	emit(r_updated(resistance));
+}
+
 
 void Qt1::display_pic()
 {
@@ -364,6 +409,12 @@ void Qt1::display_pic()
 	lb_pic->setScaledContents(1);
     lb_num->setText(QString::number(i));
     lb_sum->setText(QString::number(len));
+
+}
+void Qt1::sendmsg(){
+
+    sendR(cfd,resistor.getResistance());
+    //sendPhoto2(cfdp,filename);
 
 }
 

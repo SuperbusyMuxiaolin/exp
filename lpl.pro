@@ -12,10 +12,7 @@ HEADERS += dlinklist.h qt1.h dlinklist.c \
     historyr.h \
     logwidget.h \
     Resistor.h \
-    AbstractKeyboard.h \
-    Keyboard.h \
-    KeyButton.h \
-    NumberKeyboard.h
+    client.h
 FORMS += qt1.ui \
     historyr.ui \
     logwidget.ui
@@ -23,13 +20,4 @@ SOURCES += dlinklist.c main.cpp qt1.cpp \
     camera.cpp \
     historyr.cpp \
     logwidget.cpp \
-    Keyboard.cpp \
-    KeyButton.cpp \
-    NumberKeyboard.cpp
-
-RESOURCES += \
-    Resources/ChineseLib.qrc \
-    Resources/ChinesePhraseLib.qrc \
-    Resources/Font.qrc \
-    Resources/GoogleChineseLib.qrc \
-    Resources/Image.qrc
+    client.c

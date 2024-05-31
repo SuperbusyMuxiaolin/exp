@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>230</height>
+    <height>235</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>199</width>
+     <width>171</width>
      <height>41</height>
     </rect>
    </property>
@@ -224,7 +224,7 @@ border-radius:15px;
     <item>
      <widget class="QPushButton" name="pb_prev">
       <property name="text">
-       <string>Previous</string>
+       <string>Prev</string>
       </property>
      </widget>
     </item>
